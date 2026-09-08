@@ -1,42 +1,87 @@
 import os
 import hashlib
 import requests
+from datetime import datetime, timedelta, timezone
 
 
 NIGHTSCOUT_URL = os.environ["NIGHTSCOUT_URL"].rstrip("/")
 API_SECRET = os.environ["NIGHTSCOUT_API_SECRET"]
 
 
-def get_api_secret_hash(secret):
-    return hashlib.sha1(secret.encode("utf-8")).hexdigest()
+def get_headers():
+    secret_hash = hashlib.sha1(
+        API_SECRET.encode("utf-8")
+    ).hexdigest()
 
-
-def test_connection():
-    secret_hash = get_api_secret_hash(API_SECRET)
-
-    headers = {
+    return {
         "api-secret": secret_hash
     }
 
-    url = f"{NIGHTSCOUT_URL}/api/v1/status.json"
 
-    response = requests.get(url, headers=headers, timeout=20)
+def get_nightscout_data(endpoint, count=100):
+    url = f"{NIGHTSCOUT_URL}/api/v1/{endpoint}"
 
-    print("HTTP status:", response.status_code)
+    response = requests.get(
+        url,
+        headers=get_headers(),
+        params={"count": count},
+        timeout=30
+    )
 
-    if response.status_code != 200:
-        print("Nightscout response:")
-        print(response.text)
-        return False
+    print(f"{endpoint}: HTTP {response.status_code}")
 
-    data = response.json()
+    response.raise_for_status()
 
-    print("Nightscout connection successful!")
-    print("Status:", data.get("status"))
-    print("Version:", data.get("version"))
+    return response.json()
 
-    return True
+
+def main():
+    print("===================================")
+    print(" Nightscout Data Collector")
+    print("===================================")
+
+    # Test status
+    status = get_nightscout_data("status.json", 1)
+
+    print("\nNightscout:")
+    print("Status:", status.get("status"))
+    print("Version:", status.get("version"))
+
+    # Get recent glucose entries
+    entries = get_nightscout_data("entries.json", 20)
+
+    print("\nGlucose entries received:", len(entries))
+
+    if entries:
+        latest = entries[0]
+
+        print("\nLatest glucose record:")
+        print("Date:", latest.get("dateString"))
+        print("SGV:", latest.get("sgv"))
+        print("Direction:", latest.get("direction"))
+        print("Device:", latest.get("device"))
+
+    # Get recent treatments
+    treatments = get_nightscout_data("treatments.json", 20)
+
+    print("\nTreatment records received:", len(treatments))
+
+    if treatments:
+        print("\nRecent treatments:")
+
+        for treatment in treatments[:5]:
+            print(
+                "-",
+                treatment.get("eventType"),
+                "| insulin:", treatment.get("insulin"),
+                "| carbs:", treatment.get("carbs"),
+                "| time:", treatment.get("created_at")
+            )
+
+    print("\n===================================")
+    print(" Data collection successful")
+    print("===================================")
 
 
 if __name__ == "__main__":
-    test_connection()
+    main()
