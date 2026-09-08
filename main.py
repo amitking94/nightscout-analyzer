@@ -103,7 +103,18 @@ def analyze_with_gemini(summary_text, max_retries=4):
 
     last_error = None
     for attempt in range(1, max_retries + 1):
-        response = requests.post(url, json=payload, timeout=60)
+        try:
+            response = requests.post(url, json=payload, timeout=90)
+        except requests.exceptions.RequestException as e:
+            print(f"Request error on attempt {attempt}/{max_retries}: {e}")
+            if attempt < max_retries:
+                wait_seconds = 10 * attempt
+                print(f"Retrying in {wait_seconds}s...")
+                time.sleep(wait_seconds)
+                continue
+            else:
+                raise
+
         print(f"Gemini: HTTP {response.status_code} (attempt {attempt}/{max_retries})")
 
         if response.status_code == 200:
