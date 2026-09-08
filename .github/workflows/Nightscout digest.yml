@@ -1,0 +1,33 @@
+name: Nightscout Daily Digest
+
+on:
+  schedule:
+    # Runs at 07:00 UTC every day — adjust to your preferred time.
+    # Use https://crontab.guru to convert your local time to UTC.
+    - cron: "0 7 * * *"
+  workflow_dispatch: {}   # lets you manually trigger a run from the Actions tab for testing
+
+jobs:
+  run-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Nightscout digest
+        env:
+          NIGHTSCOUT_URL: ${{ secrets.NIGHTSCOUT_URL }}
+          NIGHTSCOUT_ACCESS_TOKEN: ${{ secrets.NIGHTSCOUT_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python main.py
