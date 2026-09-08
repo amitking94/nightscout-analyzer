@@ -10,8 +10,7 @@ def get_nightscout_data(endpoint, count=100):
     url = f"{NIGHTSCOUT_URL}/api/v1/{endpoint}"
     response = requests.get(
         url,
-        headers={"Authorization": f"Bearer {ACCESS_TOKEN}"},
-        params={"count": count},
+        params={"count": count, "token": ACCESS_TOKEN},
         timeout=30
     )
     print(f"{endpoint}: HTTP {response.status_code}")
