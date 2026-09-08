@@ -23,5 +23,4 @@ jobs:
         run: python main.py
         env:
           NIGHTSCOUT_URL: ${{ secrets.NIGHTSCOUT_URL }}
-          NIGHTSCOUT_API_SECRET: ${{ secrets.NIGHTSCOUT_API_SECRET }}
           NIGHTSCOUT_ACCESS_TOKEN: ${{ secrets.NIGHTSCOUT_ACCESS_TOKEN }}
