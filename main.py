@@ -76,7 +76,7 @@ def build_summary_text(entries, treatments):
 def analyze_with_gemini(summary_text):
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+        f"gemini-flash-latest:generateContent?key={GEMINI_API_KEY}"
     )
     system_instruction = (
         "You are a helpful assistant summarizing 24 hours of glucose monitoring data "
@@ -101,6 +101,8 @@ def analyze_with_gemini(summary_text):
     }
     response = requests.post(url, json=payload, timeout=60)
     print(f"Gemini: HTTP {response.status_code}")
+    if response.status_code >= 400:
+        print("Gemini error response:", response.text)
     response.raise_for_status()
     data = response.json()
     return data["candidates"][0]["content"]["parts"][0]["text"].strip()
