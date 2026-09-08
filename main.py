@@ -1,37 +1,21 @@
 import os
-import hashlib
 import requests
 from datetime import datetime, timedelta, timezone
 
-
 NIGHTSCOUT_URL = os.environ["NIGHTSCOUT_URL"].rstrip("/")
-API_SECRET = os.environ["NIGHTSCOUT_API_SECRET"]
-
-
-def get_headers():
-    secret_hash = hashlib.sha1(
-        API_SECRET.encode("utf-8")
-    ).hexdigest()
-
-    return {
-        "api-secret": secret_hash
-    }
+ACCESS_TOKEN = os.environ["NIGHTSCOUT_ACCESS_TOKEN"]  # e.g. "readonly-app-xxxxxxxxxxxx"
 
 
 def get_nightscout_data(endpoint, count=100):
     url = f"{NIGHTSCOUT_URL}/api/v1/{endpoint}"
-
     response = requests.get(
         url,
-        headers=get_headers(),
+        headers={"Authorization": f"Bearer {ACCESS_TOKEN}"},
         params={"count": count},
         timeout=30
     )
-
     print(f"{endpoint}: HTTP {response.status_code}")
-
     response.raise_for_status()
-
     return response.json()
 
 
@@ -42,19 +26,15 @@ def main():
 
     # Test status
     status = get_nightscout_data("status.json", 1)
-
     print("\nNightscout:")
     print("Status:", status.get("status"))
     print("Version:", status.get("version"))
 
     # Get recent glucose entries
     entries = get_nightscout_data("entries.json", 20)
-
     print("\nGlucose entries received:", len(entries))
-
     if entries:
         latest = entries[0]
-
         print("\nLatest glucose record:")
         print("Date:", latest.get("dateString"))
         print("SGV:", latest.get("sgv"))
@@ -63,12 +43,9 @@ def main():
 
     # Get recent treatments
     treatments = get_nightscout_data("treatments.json", 20)
-
     print("\nTreatment records received:", len(treatments))
-
     if treatments:
         print("\nRecent treatments:")
-
         for treatment in treatments[:5]:
             print(
                 "-",
