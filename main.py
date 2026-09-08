@@ -1,4 +1,5 @@
 import os
+import time
 import smtplib
 import requests
 from email.mime.text import MIMEText
@@ -73,7 +74,7 @@ def build_summary_text(entries, treatments):
 
 
 # ---------- Gemini analysis ----------
-def analyze_with_gemini(summary_text):
+def analyze_with_gemini(summary_text, max_retries=4):
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
         f"gemini-flash-latest:generateContent?key={GEMINI_API_KEY}"
@@ -99,13 +100,31 @@ def analyze_with_gemini(summary_text):
             "temperature": 0.4
         }
     }
-    response = requests.post(url, json=payload, timeout=60)
-    print(f"Gemini: HTTP {response.status_code}")
-    if response.status_code >= 400:
+
+    last_error = None
+    for attempt in range(1, max_retries + 1):
+        response = requests.post(url, json=payload, timeout=60)
+        print(f"Gemini: HTTP {response.status_code} (attempt {attempt}/{max_retries})")
+
+        if response.status_code == 200:
+            data = response.json()
+            return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+        # Retry on transient errors: 503 (overloaded), 429 (rate limited), 500 (server error)
+        if response.status_code in (429, 500, 503) and attempt < max_retries:
+            wait_seconds = 10 * attempt  # 10s, 20s, 30s...
+            print(f"Transient error, retrying in {wait_seconds}s...")
+            print("Response body:", response.text)
+            time.sleep(wait_seconds)
+            last_error = response
+            continue
+
+        # Non-retryable error, or out of retries
         print("Gemini error response:", response.text)
-    response.raise_for_status()
-    data = response.json()
-    return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+        response.raise_for_status()
+
+    # Should not reach here, but just in case
+    last_error.raise_for_status()
 
 
 # ---------- Email ----------
