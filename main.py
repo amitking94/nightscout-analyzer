@@ -103,7 +103,7 @@ def build_summary_text(entries, treatments):
 
 
 # ---------- Gemini analysis ----------
-GEMINI_MODELS = ["gemini-flash-latest", "gemini-2.0-flash"]
+GEMINI_MODELS = ["gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-flash-latest"]
 
 SYSTEM_INSTRUCTION = (
     "You are analyzing 24 hours of continuous glucose monitor (CGM) data and insulin/carb "
