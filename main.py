@@ -1,5 +1,6 @@
 import os
 import io
+import json
 import time
 import smtplib
 import requests
@@ -15,6 +16,8 @@ from datetime import datetime, timedelta, timezone
 # ---------- Config from environment ----------
 NIGHTSCOUT_URL = os.environ["NIGHTSCOUT_URL"].rstrip("/")
 NS_ACCESS_TOKEN = os.environ["NIGHTSCOUT_ACCESS_TOKEN"]
+
+IST = timezone(timedelta(hours=5, minutes=30))  # India Standard Time, fixed UTC+5:30
 
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 
@@ -73,17 +76,21 @@ def build_summary_text(entries, treatments):
 
     # Build one merged, time-ordered timeline of glucose readings + treatments,
     # so the model can see cause and effect (e.g. meal -> rise -> correction)
-    # rather than two disconnected lists.
+    # rather than two disconnected lists. Timestamps are converted to IST.
     timeline_events = []
 
     for e in entries:
-        ts = e.get("dateString")
-        if ts:
-            timeline_events.append((ts, f"Glucose: {e.get('sgv', '?')} mg/dL (trend: {e.get('direction', '?')})"))
+        ts_ms = e.get("date")  # epoch ms, UTC, reliable regardless of device timezone
+        if ts_ms:
+            dt_ist = datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc).astimezone(IST)
+            timeline_events.append(
+                (dt_ist, f"Glucose: {e.get('sgv', '?')} mg/dL (trend: {e.get('direction', '?')})")
+            )
 
     for t in treatments:
-        ts = t.get("created_at")
+        ts = t.get("created_at")  # ISO 8601 UTC
         if ts:
+            dt_ist = datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone(IST)
             parts = [t.get("eventType", "Treatment")]
             if t.get("insulin"):
                 parts.append(f"insulin={t['insulin']}u")
@@ -91,13 +98,13 @@ def build_summary_text(entries, treatments):
                 parts.append(f"carbs={t['carbs']}g")
             if t.get("notes"):
                 parts.append(f"notes='{t['notes']}'")
-            timeline_events.append((ts, " | ".join(parts)))
+            timeline_events.append((dt_ist, " | ".join(parts)))
 
     timeline_events.sort(key=lambda x: x[0])
 
-    lines.append(f"\nChronological timeline (oldest to newest, {len(timeline_events)} events):")
-    for ts, desc in timeline_events:
-        lines.append(f"- {ts}: {desc}")
+    lines.append(f"\nChronological timeline (oldest to newest, {len(timeline_events)} events, times in IST):")
+    for dt_ist, desc in timeline_events:
+        lines.append(f"- {dt_ist.strftime('%Y-%m-%d %I:%M %p')}: {desc}")
 
     return "\n".join(lines)
 
@@ -112,20 +119,27 @@ SYSTEM_INSTRUCTION = (
     "in their app. They need help understanding what actually happened and why, in plain, "
     "everyday language.\n\n"
     "Using the chronological timeline provided (glucose readings interleaved with meals/insulin "
-    "treatments), do the following:\n"
-    "1. Identify specific cause-and-effect patterns — e.g. which meals or doses led to a spike "
-    "or a low, and roughly how long it took and how it was handled.\n"
-    "2. Call out anything actionable or worth noticing for tomorrow — for example, a meal that "
-    "consistently spikes glucose, a low that happened around a particular time or activity, or "
-    "a correction that overshot or undershot.\n"
-    "3. Give an overall sense of the day in plain terms (e.g. 'a fairly steady day with one sharp "
-    "spike after lunch' rather than just listing min/max/avg).\n"
-    "4. Keep it concise — aim for a short, scannable email, not an essay. Use short paragraphs or "
-    "a few bullet points, not a wall of stats.\n"
-    "5. Do not just restate the summary statistics — interpret them. If nothing notable happened, "
-    "say so briefly instead of padding with generic commentary.\n\n"
+    "treatments), analyze cause-and-effect patterns — e.g. which meals or doses led to a spike "
+    "or a low, roughly how long it took, and how it was handled. Call out anything actionable "
+    "or worth noticing for tomorrow. Do not just restate summary statistics — interpret them. "
+    "If nothing notable happened in a period, say so briefly instead of padding.\n\n"
     "This is not medical advice, and you should not suggest specific dose or treatment changes — "
-    "just help the person understand their own day more clearly."
+    "just help the person understand their own day more clearly.\n\n"
+    "Respond ONLY with a JSON object (no markdown fences, no preamble) matching exactly this shape:\n"
+    "{\n"
+    '  "overall": "one or two sentence plain-language summary of the whole day",\n'
+    '  "mood": "one of: great | good | mixed | rough",\n'
+    '  "events": [\n'
+    "    {\n"
+    '      "time": "e.g. 8:15 AM",\n'
+    '      "title": "short label, e.g. Breakfast spike",\n'
+    '      "description": "1-2 sentences explaining what happened and why",\n'
+    '      "type": "one of: high | low | meal | stable"\n'
+    "    }\n"
+    "  ],\n"
+    '  "watch_for_tomorrow": "one short actionable/observational note, or empty string if nothing notable"\n'
+    "}\n"
+    "Include 3-6 events, the most notable ones only, in chronological order."
 )
 
 
@@ -145,7 +159,8 @@ def _call_gemini(model, summary_text):
             }
         ],
         "generationConfig": {
-            "temperature": 0.4
+            "temperature": 0.4,
+            "responseMimeType": "application/json"
         }
     }
 
@@ -166,7 +181,13 @@ def _call_gemini(model, summary_text):
 
         if response.status_code == 200:
             data = response.json()
-            return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            raw_text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            try:
+                return json.loads(raw_text)
+            except json.JSONDecodeError as e:
+                print(f"[{model}] Failed to parse JSON response: {e}")
+                print("Raw text:", raw_text)
+                return None
 
         if response.status_code in (429, 500, 503) and attempt < max_retries:
             wait_seconds = 10 * attempt
@@ -202,7 +223,8 @@ def build_glucose_chart(entries, treatments):
         ts_ms = e.get("date")  # epoch ms, provided by Nightscout
         sgv = e.get("sgv")
         if ts_ms and sgv:
-            points.append((datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc), sgv))
+            dt_ist = datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc).astimezone(IST)
+            points.append((dt_ist, sgv))
     points.sort(key=lambda x: x[0])
 
     if not points:
@@ -225,7 +247,7 @@ def build_glucose_chart(entries, treatments):
         if not created:
             continue
         try:
-            t_time = datetime.fromisoformat(created.replace("Z", "+00:00"))
+            t_time = datetime.fromisoformat(created.replace("Z", "+00:00")).astimezone(IST)
         except ValueError:
             continue
         label = None
@@ -243,7 +265,7 @@ def build_glucose_chart(entries, treatments):
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%I:%M %p"))
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
     fig.autofmt_xdate(rotation=45)
-    ax.set_title("Last 24 Hours — Glucose Trend")
+    ax.set_title("Last 24 Hours — Glucose Trend (IST)")
     ax.grid(True, alpha=0.25)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -255,26 +277,157 @@ def build_glucose_chart(entries, treatments):
     plt.close(fig)
     buf.seek(0)
     return buf.read()
-def send_email(subject, body_text, chart_png=None):
+# ---------- HTML email rendering ----------
+EVENT_STYLES = {
+    "high": {"emoji": "🔺", "color": "#e0693e", "bg": "#fdf1ec"},
+    "low": {"emoji": "🔻", "color": "#c94d4d", "bg": "#fdeeee"},
+    "meal": {"emoji": "🍽️", "color": "#3a7ca5", "bg": "#eef5fa"},
+    "stable": {"emoji": "✅", "color": "#3f8f5f", "bg": "#eef8f0"},
+}
+MOOD_STYLES = {
+    "great": {"emoji": "🌟", "color": "#3f8f5f"},
+    "good": {"emoji": "🙂", "color": "#4a9d6f"},
+    "mixed": {"emoji": "⚖️", "color": "#c9902e"},
+    "rough": {"emoji": "⚠️", "color": "#c94d4d"},
+}
+
+
+def compute_stats(entries):
+    sgvs = [e["sgv"] for e in entries if "sgv" in e]
+    if not sgvs:
+        return None
+    in_range = sum(1 for v in sgvs if 70 <= v <= 180)
+    return {
+        "avg": round(sum(sgvs) / len(sgvs)),
+        "min": min(sgvs),
+        "max": max(sgvs),
+        "pct_in_range": round((in_range / len(sgvs)) * 100),
+        "current": sgvs[0] if entries and entries[0].get("sgv") else sgvs[-1],
+    }
+
+
+def render_html_email(analysis, stats, date_str):
+    mood = MOOD_STYLES.get(analysis.get("mood", "good"), MOOD_STYLES["good"])
+    overall = analysis.get("overall", "")
+    events = analysis.get("events", [])
+    watch_for = analysis.get("watch_for_tomorrow", "")
+
+    stat_cards = ""
+    if stats:
+        stat_items = [
+            ("Average", f"{stats['avg']} mg/dL", "#3a7ca5"),
+            ("Range", f"{stats['min']}–{stats['max']} mg/dL", "#6a5acd"),
+            ("Time in range", f"{stats['pct_in_range']}%", "#3f8f5f"),
+        ]
+        cells = "".join(
+            f"""<td style="padding:14px 10px; text-align:center; background:#f7f9fb; border-radius:10px;">
+                    <div style="font-size:12px; color:#7a8494; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;">{label}</div>
+                    <div style="font-size:20px; font-weight:700; color:{color}; margin-top:4px;">{value}</div>
+                </td>"""
+            for label, value, color in stat_items
+        )
+        stat_cards = f"""
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="8" style="margin: 20px 0;">
+            <tr>{cells}</tr>
+        </table>
+        """
+
+    event_cards = ""
+    for ev in events:
+        style = EVENT_STYLES.get(ev.get("type", "stable"), EVENT_STYLES["stable"])
+        event_cards += f"""
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+               style="margin-bottom:10px; background:{style['bg']}; border-radius:10px; border-left:4px solid {style['color']};">
+            <tr>
+                <td style="padding:12px 16px;">
+                    <span style="font-size:15px;">{style['emoji']}</span>
+                    <span style="font-weight:700; color:#2a2f36; font-size:14px;">{ev.get('title', '')}</span>
+                    <span style="color:#8a93a3; font-size:12px; float:right;">{ev.get('time', '')}</span>
+                    <div style="color:#4a5261; font-size:13px; margin-top:4px; line-height:1.5;">{ev.get('description', '')}</div>
+                </td>
+            </tr>
+        </table>
+        """
+
+    watch_block = ""
+    if watch_for:
+        watch_block = f"""
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+               style="margin-top:18px; background:#fff8e6; border-radius:10px; border-left:4px solid #e0a63e;">
+            <tr>
+                <td style="padding:12px 16px;">
+                    <span style="font-weight:700; color:#8a6516; font-size:13px;">💡 WORTH NOTICING</span>
+                    <div style="color:#6b5426; font-size:13px; margin-top:4px; line-height:1.5;">{watch_for}</div>
+                </td>
+            </tr>
+        </table>
+        """
+
+    html = f"""
+    <html>
+    <body style="margin:0; padding:0; background:#eef1f5; font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5; padding: 24px 0;">
+            <tr>
+                <td align="center">
+                    <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+                           style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+                        <tr>
+                            <td style="background: linear-gradient(135deg, #3a7ca5, #6a5acd); padding: 24px 28px;">
+                                <div style="color:#ffffff; font-size:20px; font-weight:700;">📊 Daily Glucose Digest</div>
+                                <div style="color:#e0e8f5; font-size:13px; margin-top:2px;">{date_str}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 24px 28px 8px 28px;">
+                                <div style="font-size:15px; color:#2a2f36; line-height:1.6;">
+                                    <span style="font-size:18px;">{mood['emoji']}</span>
+                                    <span style="font-weight:600;">{overall}</span>
+                                </div>
+                                {stat_cards}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 28px 8px 28px;">
+                                <div style="font-size:12px; font-weight:700; color:#8a93a3; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:10px;">Today's Timeline</div>
+                                {event_cards}
+                                {watch_block}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 28px 24px 28px;">
+                                <img src="cid:glucose_chart" style="width:100%; border-radius:10px; margin-top:12px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 16px 28px; background:#f7f9fb; border-top:1px solid #eceff3;">
+                                <div style="font-size:11px; color:#a3aab6; line-height:1.5;">
+                                    Not medical advice — a plain-language recap generated from your Nightscout data.
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    """
+    return html
+
+
+def send_email(subject, html_body, chart_png=None):
     msg = MIMEMultipart("related")
     msg["Subject"] = subject
     msg["From"] = SMTP_USER
     msg["To"] = EMAIL_TO
 
+    msg.attach(MIMEText(html_body, "html"))
+
     if chart_png:
-        html_body = (
-            f"<html><body style='font-family: sans-serif; white-space: pre-wrap;'>"
-            f"{body_text}"
-            f"<br><br><img src='cid:glucose_chart' style='max-width:100%;'>"
-            f"</body></html>"
-        )
-        msg.attach(MIMEText(html_body, "html"))
         image = MIMEImage(chart_png, name="glucose_chart.png")
         image.add_header("Content-ID", "<glucose_chart>")
         image.add_header("Content-Disposition", "inline", filename="glucose_chart.png")
         msg.attach(image)
-    else:
-        msg.attach(MIMEText(body_text, "plain"))
 
     with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
         server.starttls()
@@ -299,19 +452,23 @@ def main():
 
     print("\nSending to Gemini for analysis...")
     analysis = analyze_with_gemini(summary_text)
-    print("\n--- Analysis ---")
-    print(analysis)
+    print("\n--- Analysis (structured) ---")
+    print(json.dumps(analysis, indent=2))
 
-    today = datetime.now().strftime("%Y-%m-%d")
-    subject = f"Nightscout Daily Digest — {today}"
-    analysis_html = analysis.replace("\n", "<br>")
-    body = f"{analysis_html}<br><br>---<br>Automated daily digest from your Nightscout data collector."
+    stats = compute_stats(entries)
+
+    today = datetime.now(IST).strftime("%A, %B %d, %Y")
+    subject_date = datetime.now(IST).strftime("%Y-%m-%d")
+    subject = f"📊 Nightscout Daily Digest — {subject_date}"
 
     print("\nGenerating chart...")
     chart_png = build_glucose_chart(entries, treatments)
 
+    print("\nBuilding HTML email...")
+    html_body = render_html_email(analysis, stats, today)
+
     print("\nSending email...")
-    send_email(subject, body, chart_png=chart_png)
+    send_email(subject, html_body, chart_png=chart_png)
 
     print("\n===================================")
     print(" Done")
