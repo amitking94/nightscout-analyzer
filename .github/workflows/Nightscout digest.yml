@@ -1,9 +1,12 @@
 name: Nightscout Daily Digest
 
+permissions:
+  contents: write   # needed so the workflow can commit daily summary JSON files back to the repo
+
 on:
   schedule:
     # Runs at 07:00 UTC every day — adjust to your preferred time.
-    # Use https://crontab.guru to convert your local time to UTC.
+    # Use https://crontab.guru to convert your local (IST) time to UTC.
     - cron: "0 7 * * *"
   workflow_dispatch: {}   # lets you manually trigger a run from the Actions tab for testing
 
@@ -27,7 +30,7 @@ jobs:
           NIGHTSCOUT_URL: ${{ secrets.NIGHTSCOUT_URL }}
           NIGHTSCOUT_ACCESS_TOKEN: ${{ secrets.NIGHTSCOUT_ACCESS_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          WHATSAPP_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
+          WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+          WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
         run: python main.py
