@@ -1,0 +1,33 @@
+name: Nightscout Weekly Digest
+
+on:
+  schedule:
+    # Runs every Sunday at 08:00 UTC — adjust to your preferred time.
+    # Use https://crontab.guru to convert your local (IST) time to UTC.
+    - cron: "0 8 * * 0"
+  workflow_dispatch: {}   # lets you manually trigger a run from the Actions tab for testing
+
+jobs:
+  run-weekly-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests matplotlib
+
+      - name: Run weekly digest
+        env:
+          NIGHTSCOUT_URL: ${{ secrets.NIGHTSCOUT_URL }}
+          NIGHTSCOUT_ACCESS_TOKEN: ${{ secrets.NIGHTSCOUT_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          WHATSAPP_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
+          WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+          WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
+        run: python weekly.py
