@@ -2,15 +2,12 @@ import os
 import io
 import json
 import time
-import smtplib
+import subprocess
 import requests
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
 from datetime import datetime, timedelta, timezone
 
 # ---------- Config from environment ----------
@@ -21,11 +18,15 @@ IST = timezone(timedelta(hours=5, minutes=30))  # India Standard Time, fixed UTC
 
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 
-SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
-SMTP_USER = os.environ["SMTP_USER"]              # the email address sending the digest
-SMTP_PASSWORD = os.environ["SMTP_PASSWORD"]      # app password, not your regular login password
-EMAIL_TO = os.environ["EMAIL_TO"]                # where the digest should be sent
+WHATSAPP_PHONE_NUMBER_ID = os.environ["WHATSAPP_PHONE_NUMBER_ID"]
+WHATSAPP_ACCESS_TOKEN = os.environ["WHATSAPP_ACCESS_TOKEN"]
+WHATSAPP_TO = os.environ["WHATSAPP_TO"]  # e.g. 91XXXXXXXXXX, no + sign
+WHATSAPP_API_VERSION = os.environ.get("WHATSAPP_API_VERSION", "v21.0")
+
+# Template names — must exactly match what you created and got approved in WhatsApp Manager
+TEMPLATE_TEXT = "digest_text"
+TEMPLATE_IMAGE = "digest_image"
+TEMPLATE_LANG = "en_US"
 
 
 # ---------- Nightscout ----------
@@ -43,10 +44,9 @@ def get_nightscout_data(endpoint, params=None):
 def get_last_24h_entries():
     since = datetime.now(timezone.utc) - timedelta(hours=24)
     since_ms = int(since.timestamp() * 1000)
-    # find query pulls entries with date >= since_ms, sorted desc by default
     params = {
         "find[date][$gte]": since_ms,
-        "count": 2000  # generous cap; ~288 expected at 5-min intervals
+        "count": 2000
     }
     return get_nightscout_data("entries.json", params)
 
@@ -74,9 +74,8 @@ def build_summary_text(entries, treatments):
         lines.append(f"Min: {min(sgvs)} mg/dL, Max: {max(sgvs)} mg/dL, Avg: {avg:.0f} mg/dL")
         lines.append(f"Estimated time in range (70-180 mg/dL): {pct_in_range:.0f}%")
 
-    # Build one merged, time-ordered timeline of glucose readings + treatments,
-    # so the model can see cause and effect (e.g. meal -> rise -> correction)
-    # rather than two disconnected lists. Timestamps are converted to IST.
+    # Merged, time-ordered timeline of glucose readings + treatments (converted to IST),
+    # so the model can see cause and effect (e.g. meal -> rise -> correction).
     timeline_events = []
 
     for e in entries:
@@ -114,7 +113,7 @@ GEMINI_MODELS = ["gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-flash-late
 
 SYSTEM_INSTRUCTION = (
     "You are analyzing 24 hours of continuous glucose monitor (CGM) data and insulin/carb "
-    "treatment logs for a personal daily email digest. The person reading this lives with "
+    "treatment logs for a personal daily WhatsApp digest. The person reading this lives with "
     "diabetes day to day — they don't need a clinical recap of numbers they can already see "
     "in their app. They need help understanding what actually happened and why, in plain, "
     "everyday language.\n\n"
@@ -143,19 +142,22 @@ SYSTEM_INSTRUCTION = (
 )
 
 
-def _call_gemini(model, summary_text):
+def _call_gemini(model, prompt_text, system_instruction=None, user_prefix="Here is the last 24 hours of data:\n\n"):
+    if system_instruction is None:
+        system_instruction = SYSTEM_INSTRUCTION
+
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
         f"{model}:generateContent?key={GEMINI_API_KEY}"
     )
     payload = {
         "system_instruction": {
-            "parts": [{"text": SYSTEM_INSTRUCTION}]
+            "parts": [{"text": system_instruction}]
         },
         "contents": [
             {
                 "role": "user",
-                "parts": [{"text": f"Here is the last 24 hours of data:\n\n{summary_text}"}]
+                "parts": [{"text": f"{user_prefix}{prompt_text}"}]
             }
         ],
         "generationConfig": {
@@ -196,7 +198,6 @@ def _call_gemini(model, summary_text):
             time.sleep(wait_seconds)
             continue
 
-        # Non-retryable error, or out of retries for this model
         print(f"[{model}] error response:", response.text)
         return None
 
@@ -216,11 +217,10 @@ def analyze_with_gemini(summary_text):
 
 # ---------- Chart generation ----------
 def build_glucose_chart(entries, treatments):
-    """Returns PNG image bytes of a 24h glucose trend chart with treatment markers."""
-    # Parse and sort glucose entries by time
+    """Returns PNG image bytes of a 24h glucose trend chart with treatment markers, in IST."""
     points = []
     for e in entries:
-        ts_ms = e.get("date")  # epoch ms, provided by Nightscout
+        ts_ms = e.get("date")
         sgv = e.get("sgv")
         if ts_ms and sgv:
             dt_ist = datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc).astimezone(IST)
@@ -235,13 +235,9 @@ def build_glucose_chart(entries, treatments):
 
     fig, ax = plt.subplots(figsize=(9, 4), dpi=150)
 
-    # Target range shading (70-180 mg/dL)
     ax.axhspan(70, 180, color="#d7f0d7", alpha=0.6, zorder=0, label="Target range")
-
-    # Glucose line
     ax.plot(times, values, color="#2c6fbb", linewidth=1.6, zorder=2)
 
-    # Mark treatments (meals/insulin) as vertical dashed lines
     for t in treatments:
         created = t.get("created_at")
         if not created:
@@ -257,8 +253,7 @@ def build_glucose_chart(entries, treatments):
             label = f"{t.get('insulin')}u insulin"
         ax.axvline(t_time, color="#999999", linestyle="--", linewidth=0.8, alpha=0.7, zorder=1)
         if label:
-            ax.text(t_time, ax.get_ylim()[1] if False else max(values) + 15, label,
-                     rotation=90, fontsize=6, color="#666666", ha="right", va="top")
+            ax.text(t_time, max(values) + 15, label, rotation=90, fontsize=6, color="#666666", ha="right", va="top")
 
     ax.set_ylabel("Glucose (mg/dL)")
     ax.set_ylim(bottom=min(30, min(values) - 20), top=max(values) + 40)
@@ -269,7 +264,6 @@ def build_glucose_chart(entries, treatments):
     ax.grid(True, alpha=0.25)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-
     fig.tight_layout()
 
     buf = io.BytesIO()
@@ -277,164 +271,194 @@ def build_glucose_chart(entries, treatments):
     plt.close(fig)
     buf.seek(0)
     return buf.read()
-# ---------- HTML email rendering ----------
-EVENT_STYLES = {
-    "high": {"emoji": "🔺", "color": "#e0693e", "bg": "#fdf1ec"},
-    "low": {"emoji": "🔻", "color": "#c94d4d", "bg": "#fdeeee"},
-    "meal": {"emoji": "🍽️", "color": "#3a7ca5", "bg": "#eef5fa"},
-    "stable": {"emoji": "✅", "color": "#3f8f5f", "bg": "#eef8f0"},
-}
-MOOD_STYLES = {
-    "great": {"emoji": "🌟", "color": "#3f8f5f"},
-    "good": {"emoji": "🙂", "color": "#4a9d6f"},
-    "mixed": {"emoji": "⚖️", "color": "#c9902e"},
-    "rough": {"emoji": "⚠️", "color": "#c94d4d"},
-}
 
 
+# ---------- Stats ----------
 def compute_stats(entries):
     sgvs = [e["sgv"] for e in entries if "sgv" in e]
     if not sgvs:
         return None
     in_range = sum(1 for v in sgvs if 70 <= v <= 180)
+    low = sum(1 for v in sgvs if v < 70)
+    high = sum(1 for v in sgvs if v > 180)
+    n = len(sgvs)
     return {
-        "avg": round(sum(sgvs) / len(sgvs)),
+        "avg": round(sum(sgvs) / n),
         "min": min(sgvs),
         "max": max(sgvs),
-        "pct_in_range": round((in_range / len(sgvs)) * 100),
+        "pct_in_range": round((in_range / n) * 100),
+        "pct_low": round((low / n) * 100),
+        "pct_high": round((high / n) * 100),
         "current": sgvs[0] if entries and entries[0].get("sgv") else sgvs[-1],
     }
 
 
-def render_html_email(analysis, stats, date_str):
-    mood = MOOD_STYLES.get(analysis.get("mood", "good"), MOOD_STYLES["good"])
+# ---------- WhatsApp text formatting ----------
+EVENT_EMOJI = {"high": "🔺", "low": "🔻", "meal": "🍽️", "stable": "✅"}
+MOOD_EMOJI = {"great": "🌟", "good": "🙂", "mixed": "⚖️", "rough": "⚠️"}
+
+
+def render_whatsapp_message(analysis, stats, date_str):
+    mood_emoji = MOOD_EMOJI.get(analysis.get("mood", "good"), "🙂")
     overall = analysis.get("overall", "")
     events = analysis.get("events", [])
     watch_for = analysis.get("watch_for_tomorrow", "")
 
-    stat_cards = ""
+    lines = ["*📊 Daily Glucose Digest*", f"_{date_str}_", ""]
+    lines.append(f"{mood_emoji} {overall}")
+    lines.append("")
+
     if stats:
-        stat_items = [
-            ("Average", f"{stats['avg']} mg/dL", "#3a7ca5"),
-            ("Range", f"{stats['min']}–{stats['max']} mg/dL", "#6a5acd"),
-            ("Time in range", f"{stats['pct_in_range']}%", "#3f8f5f"),
-        ]
-        cells = "".join(
-            f"""<td style="padding:14px 10px; text-align:center; background:#f7f9fb; border-radius:10px;">
-                    <div style="font-size:12px; color:#7a8494; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;">{label}</div>
-                    <div style="font-size:20px; font-weight:700; color:{color}; margin-top:4px;">{value}</div>
-                </td>"""
-            for label, value, color in stat_items
-        )
-        stat_cards = f"""
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="8" style="margin: 20px 0;">
-            <tr>{cells}</tr>
-        </table>
-        """
+        lines.append(f"*Average:* {stats['avg']} mg/dL")
+        lines.append(f"*Range:* {stats['min']}–{stats['max']} mg/dL")
+        lines.append(f"*Time in range:* {stats['pct_in_range']}%  (low {stats['pct_low']}% · high {stats['pct_high']}%)")
+        lines.append("")
 
-    event_cards = ""
-    for ev in events:
-        style = EVENT_STYLES.get(ev.get("type", "stable"), EVENT_STYLES["stable"])
-        event_cards += f"""
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
-               style="margin-bottom:10px; background:{style['bg']}; border-radius:10px; border-left:4px solid {style['color']};">
-            <tr>
-                <td style="padding:12px 16px;">
-                    <span style="font-size:15px;">{style['emoji']}</span>
-                    <span style="font-weight:700; color:#2a2f36; font-size:14px;">{ev.get('title', '')}</span>
-                    <span style="color:#8a93a3; font-size:12px; float:right;">{ev.get('time', '')}</span>
-                    <div style="color:#4a5261; font-size:13px; margin-top:4px; line-height:1.5;">{ev.get('description', '')}</div>
-                </td>
-            </tr>
-        </table>
-        """
+    if events:
+        lines.append("*Today's timeline:*")
+        for ev in events:
+            emoji = EVENT_EMOJI.get(ev.get("type", "stable"), "•")
+            lines.append(f"{emoji} *{ev.get('time', '')} — {ev.get('title', '')}*")
+            lines.append(f"{ev.get('description', '')}")
+        lines.append("")
 
-    watch_block = ""
     if watch_for:
-        watch_block = f"""
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
-               style="margin-top:18px; background:#fff8e6; border-radius:10px; border-left:4px solid #e0a63e;">
-            <tr>
-                <td style="padding:12px 16px;">
-                    <span style="font-weight:700; color:#8a6516; font-size:13px;">💡 WORTH NOTICING</span>
-                    <div style="color:#6b5426; font-size:13px; margin-top:4px; line-height:1.5;">{watch_for}</div>
-                </td>
-            </tr>
-        </table>
-        """
+        lines.append(f"💡 *Worth noticing:* {watch_for}")
+        lines.append("")
 
-    html = f"""
-    <html>
-    <body style="margin:0; padding:0; background:#eef1f5; font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5; padding: 24px 0;">
-            <tr>
-                <td align="center">
-                    <table role="presentation" width="600" cellpadding="0" cellspacing="0"
-                           style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
-                        <tr>
-                            <td style="background: linear-gradient(135deg, #3a7ca5, #6a5acd); padding: 24px 28px;">
-                                <div style="color:#ffffff; font-size:20px; font-weight:700;">📊 Daily Glucose Digest</div>
-                                <div style="color:#e0e8f5; font-size:13px; margin-top:2px;">{date_str}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 24px 28px 8px 28px;">
-                                <div style="font-size:15px; color:#2a2f36; line-height:1.6;">
-                                    <span style="font-size:18px;">{mood['emoji']}</span>
-                                    <span style="font-weight:600;">{overall}</span>
-                                </div>
-                                {stat_cards}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 4px 28px 8px 28px;">
-                                <div style="font-size:12px; font-weight:700; color:#8a93a3; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:10px;">Today's Timeline</div>
-                                {event_cards}
-                                {watch_block}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 28px 24px 28px;">
-                                <img src="cid:glucose_chart" style="width:100%; border-radius:10px; margin-top:12px;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 16px 28px; background:#f7f9fb; border-top:1px solid #eceff3;">
-                                <div style="font-size:11px; color:#a3aab6; line-height:1.5;">
-                                    Not medical advice — a plain-language recap generated from your Nightscout data.
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </body>
-    </html>
-    """
-    return html
+    lines.append("_Not medical advice — a plain-language recap from your Nightscout data._")
+
+    return "\n".join(lines)
 
 
-def send_email(subject, html_body, chart_png=None):
-    msg = MIMEMultipart("related")
-    msg["Subject"] = subject
-    msg["From"] = SMTP_USER
-    msg["To"] = EMAIL_TO
+# ---------- Meta WhatsApp Cloud API ----------
+def _whatsapp_api_url(path):
+    return f"https://graph.facebook.com/{WHATSAPP_API_VERSION}/{path}"
 
-    msg.attach(MIMEText(html_body, "html"))
 
-    if chart_png:
-        image = MIMEImage(chart_png, name="glucose_chart.png")
-        image.add_header("Content-ID", "<glucose_chart>")
-        image.add_header("Content-Disposition", "inline", filename="glucose_chart.png")
-        msg.attach(image)
+def upload_media(image_bytes, filename="chart.png"):
+    """Uploads an image directly to WhatsApp's own media endpoint and returns a media ID."""
+    url = _whatsapp_api_url(f"{WHATSAPP_PHONE_NUMBER_ID}/media")
+    headers = {"Authorization": f"Bearer {WHATSAPP_ACCESS_TOKEN}"}
+    files = {
+        "file": (filename, image_bytes, "image/png"),
+    }
+    data = {
+        "messaging_product": "whatsapp",
+        "type": "image/png",
+    }
+    response = requests.post(url, headers=headers, files=files, data=data, timeout=60)
+    print(f"WhatsApp media upload: HTTP {response.status_code}")
+    if response.status_code >= 400:
+        print("Response:", response.text)
+    response.raise_for_status()
+    media_id = response.json()["id"]
+    print(f"Uploaded media, ID: {media_id}")
+    return media_id
 
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-        server.starttls()
-        server.login(SMTP_USER, SMTP_PASSWORD)
-        server.sendmail(SMTP_USER, [EMAIL_TO], msg.as_string())
 
-    print(f"Email sent to {EMAIL_TO}")
+def _send_template(template_name, components):
+    url = _whatsapp_api_url(f"{WHATSAPP_PHONE_NUMBER_ID}/messages")
+    headers = {
+        "Authorization": f"Bearer {WHATSAPP_ACCESS_TOKEN}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": WHATSAPP_TO,
+        "type": "template",
+        "template": {
+            "name": template_name,
+            "language": {"code": TEMPLATE_LANG},
+            "components": components,
+        },
+    }
+    response = requests.post(url, headers=headers, json=payload, timeout=30)
+    print(f"WhatsApp send ({template_name}): HTTP {response.status_code}")
+    if response.status_code >= 400:
+        print("Response:", response.text)
+    response.raise_for_status()
+
+
+def send_whatsapp_text(text):
+    """Sends the digest_text template with the full message as its named body variable."""
+    components = [
+        {
+            "type": "body",
+            "parameters": [{"type": "text", "parameter_name": "digest_text", "text": text}],
+        }
+    ]
+    _send_template(TEMPLATE_TEXT, components)
+
+
+def send_whatsapp_image(image_bytes, caption, filename="chart.png"):
+    """Sends the digest_image template: an uploaded chart as the header image, with a caption."""
+    media_id = upload_media(image_bytes, filename=filename)
+    components = [
+        {
+            "type": "header",
+            "parameters": [{"type": "image", "image": {"id": media_id}}],
+        },
+        {
+            "type": "body",
+            "parameters": [{"type": "text", "parameter_name": "caption_text", "text": caption}],
+        },
+    ]
+    _send_template(TEMPLATE_IMAGE, components)
+
+
+# ---------- Daily summary persistence (for the weekly digest) ----------
+SUMMARY_DIR = "data/daily_summaries"
+SUMMARY_RETENTION_DAYS = 7
+
+
+def save_daily_summary(date_str_iso, analysis, stats):
+    os.makedirs(SUMMARY_DIR, exist_ok=True)
+    record = {
+        "date": date_str_iso,
+        "analysis": analysis,
+        "stats": stats,
+    }
+    path = os.path.join(SUMMARY_DIR, f"{date_str_iso}.json")
+    with open(path, "w") as f:
+        json.dump(record, f, indent=2)
+    print(f"Saved daily summary to {path}")
+
+
+def prune_old_summaries(retention_days=SUMMARY_RETENTION_DAYS):
+    if not os.path.isdir(SUMMARY_DIR):
+        return
+    cutoff = datetime.now(IST).date() - timedelta(days=retention_days)
+    removed = []
+    for fname in os.listdir(SUMMARY_DIR):
+        if not fname.endswith(".json"):
+            continue
+        date_part = fname[:-5]
+        try:
+            file_date = datetime.strptime(date_part, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        if file_date < cutoff:
+            os.remove(os.path.join(SUMMARY_DIR, fname))
+            removed.append(fname)
+    if removed:
+        print(f"Pruned {len(removed)} old summary file(s): {removed}")
+
+
+def git_commit_summaries():
+    try:
+        subprocess.run(["git", "config", "user.name", "nightscout-bot"], check=True)
+        subprocess.run(["git", "config", "user.email", "nightscout-bot@users.noreply.github.com"], check=True)
+        subprocess.run(["git", "add", SUMMARY_DIR], check=True)
+        result = subprocess.run(["git", "diff", "--cached", "--quiet"])
+        if result.returncode == 0:
+            print("No changes to commit for daily summaries.")
+            return
+        subprocess.run(["git", "commit", "-m", "Update daily glucose summary data"], check=True)
+        subprocess.run(["git", "push"], check=True)
+        print("Committed and pushed daily summary changes.")
+    except subprocess.CalledProcessError as e:
+        print(f"Git commit/push failed (non-fatal): {e}")
 
 
 # ---------- Main ----------
@@ -459,16 +483,23 @@ def main():
 
     today = datetime.now(IST).strftime("%A, %B %d, %Y")
     subject_date = datetime.now(IST).strftime("%Y-%m-%d")
-    subject = f"📊 Nightscout Daily Digest — {subject_date}"
+
+    print("\nBuilding WhatsApp message...")
+    message_text = render_whatsapp_message(analysis, stats, today)
+
+    print("\nSending WhatsApp text message...")
+    send_whatsapp_text(message_text)
 
     print("\nGenerating chart...")
     chart_png = build_glucose_chart(entries, treatments)
+    if chart_png:
+        print("\nSending chart image...")
+        send_whatsapp_image(chart_png, caption="📈 Glucose trend (IST)", filename=f"glucose_{subject_date}.png")
 
-    print("\nBuilding HTML email...")
-    html_body = render_html_email(analysis, stats, today)
-
-    print("\nSending email...")
-    send_email(subject, html_body, chart_png=chart_png)
+    print("\nSaving daily summary for weekly digest...")
+    save_daily_summary(subject_date, analysis, stats)
+    prune_old_summaries()
+    git_commit_summaries()
 
     print("\n===================================")
     print(" Done")
