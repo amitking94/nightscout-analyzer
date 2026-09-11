@@ -381,18 +381,18 @@ def _send_template(template_name, components):
 
 
 def send_whatsapp_text(text):
-    """Sends the digest_text template with the full message as its named body variable."""
+    """Sends the digest_text template with the full message as its single body variable ({{1}})."""
     components = [
         {
             "type": "body",
-            "parameters": [{"type": "text", "parameter_name": "digest_text", "text": text}],
+            "parameters": [{"type": "text", "text": text}],
         }
     ]
     _send_template(TEMPLATE_TEXT, components)
 
 
 def send_whatsapp_image(image_bytes, caption, filename="chart.png"):
-    """Sends the digest_image template: an uploaded chart as the header image, with a caption."""
+    """Sends the digest_image template: an uploaded chart as the header image, with a caption ({{1}})."""
     media_id = upload_media(image_bytes, filename=filename)
     components = [
         {
@@ -401,7 +401,7 @@ def send_whatsapp_image(image_bytes, caption, filename="chart.png"):
         },
         {
             "type": "body",
-            "parameters": [{"type": "text", "parameter_name": "caption_text", "text": caption}],
+            "parameters": [{"type": "text", "text": caption}],
         },
     ]
     _send_template(TEMPLATE_IMAGE, components)
