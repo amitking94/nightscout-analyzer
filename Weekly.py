@@ -1,13 +1,12 @@
 """
-Weekly Nightscout Digest (WhatsApp via Meta Cloud API)
---------------------------------------------------------
+Weekly Nightscout Digest (Email)
+----------------------------------
 Reads the last 7 daily summary JSON files (saved by main.py into data/daily_summaries/),
-asks Gemini to synthesize a week-level narrative, and sends a detailed WhatsApp report:
-a text message (via the digest_text template) with the analysis, a pie chart (time-in-range
-breakdown), and a bar chart (daily average trend across the week) — both via the digest_image
-template.
+asks Gemini to synthesize a week-level narrative, and emails a styled report with a
+pie chart (time-in-range breakdown) and a bar chart (daily average trend across the week).
 
-Reuses shared building blocks from main.py rather than duplicating them here.
+Reuses shared building blocks from main.py (Gemini calling, IST timezone, email sending)
+rather than duplicating them here.
 """
 
 import os
@@ -18,14 +17,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
-from main import (
-    IST,
-    GEMINI_MODELS,
-    _call_gemini,
-    SUMMARY_DIR,
-    send_whatsapp_text,
-    send_whatsapp_image,
-)
+from main import IST, GEMINI_MODELS, _call_gemini, SUMMARY_DIR, send_email
 
 WEEKLY_SYSTEM_INSTRUCTION = (
     "You are reviewing a full week of daily glucose summaries (each day was already analyzed "
@@ -202,46 +194,140 @@ def build_daily_trend_chart(daily_points):
     return buf.read()
 
 
-# ---------- WhatsApp text formatting ----------
-MOOD_EMOJI = {"great": "🌟", "good": "🙂", "mixed": "⚖️", "rough": "⚠️"}
+# ---------- HTML rendering ----------
+MOOD_STYLES = {
+    "great": {"emoji": "🌟", "color": "#3f8f5f"},
+    "good": {"emoji": "🙂", "color": "#4a9d6f"},
+    "mixed": {"emoji": "⚖️", "color": "#c9902e"},
+    "rough": {"emoji": "⚠️", "color": "#c94d4d"},
+}
 
 
-def render_weekly_whatsapp_message(weekly, week_agg, week_range_str):
-    mood_emoji = MOOD_EMOJI.get(weekly.get("mood", "good"), "🙂")
-    best = weekly.get("best_day", {})
-    tough = weekly.get("toughest_day", {})
+def render_weekly_html_email(weekly, week_agg, week_range_str):
+    mood = MOOD_STYLES.get(weekly.get("mood", "good"), MOOD_STYLES["good"])
+    overall = weekly.get("overall", "")
+    best_day = weekly.get("best_day", {})
+    toughest_day = weekly.get("toughest_day", {})
     patterns = weekly.get("patterns", [])
     focus = weekly.get("focus_next_week", [])
 
-    lines = ["*🗓️ Weekly Glucose Digest*", f"_{week_range_str}_", ""]
-    lines.append(f"{mood_emoji} {weekly.get('overall', '')}")
-    lines.append("")
+    stat_items = [
+        ("Week Avg", f"{week_agg.get('week_avg', '—')} mg/dL", "#3a7ca5"),
+        ("Time in Range", f"{week_agg.get('week_tir', '—')}%", "#3f8f5f"),
+    ]
+    stat_cells = "".join(
+        f"""<td style="padding:14px 10px; text-align:center; background:#f7f9fb; border-radius:10px;">
+                <div style="font-size:12px; color:#7a8494; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;">{label}</div>
+                <div style="font-size:20px; font-weight:700; color:{color}; margin-top:4px;">{value}</div>
+            </td>"""
+        for label, value, color in stat_items
+    )
 
-    if week_agg.get("week_avg") is not None:
-        lines.append(f"*Week average:* {week_agg['week_avg']} mg/dL")
-    if week_agg.get("week_tir") is not None:
-        lines.append(f"*Time in range:* {week_agg['week_tir']}%")
-    lines.append("")
+    day_cards = f"""
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="8" style="margin: 16px 0;">
+        <tr>
+            <td style="padding:14px 16px; background:#eef8f0; border-radius:10px; border-left:4px solid #3f8f5f; width:50%;">
+                <div style="font-size:12px; font-weight:700; color:#3f8f5f; text-transform:uppercase;">🏆 Best Day</div>
+                <div style="font-size:13px; color:#2a2f36; font-weight:600; margin-top:4px;">{best_day.get('date', '—')}</div>
+                <div style="font-size:12px; color:#4a5261; margin-top:2px;">{best_day.get('reason', '')}</div>
+            </td>
+            <td style="padding:14px 16px; background:#fdf1ec; border-radius:10px; border-left:4px solid #e0693e; width:50%;">
+                <div style="font-size:12px; font-weight:700; color:#e0693e; text-transform:uppercase;">🎯 Toughest Day</div>
+                <div style="font-size:13px; color:#2a2f36; font-weight:600; margin-top:4px;">{toughest_day.get('date', '—')}</div>
+                <div style="font-size:12px; color:#4a5261; margin-top:2px;">{toughest_day.get('reason', '')}</div>
+            </td>
+        </tr>
+    </table>
+    """
 
-    lines.append(f"🏆 *Best day:* {best.get('date', '—')} — {best.get('reason', '')}")
-    lines.append(f"🎯 *Toughest day:* {tough.get('date', '—')} — {tough.get('reason', '')}")
-    lines.append("")
+    pattern_cards = ""
+    for p in patterns:
+        pattern_cards += f"""
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+               style="margin-bottom:10px; background:#eef5fa; border-radius:10px; border-left:4px solid #3a7ca5;">
+            <tr>
+                <td style="padding:12px 16px;">
+                    <span style="font-weight:700; color:#2a2f36; font-size:14px;">🔁 {p.get('title', '')}</span>
+                    <div style="color:#4a5261; font-size:13px; margin-top:4px; line-height:1.5;">{p.get('description', '')}</div>
+                </td>
+            </tr>
+        </table>
+        """
 
-    if patterns:
-        lines.append("*🔁 Patterns this week:*")
-        for p in patterns:
-            lines.append(f"• *{p.get('title', '')}* — {p.get('description', '')}")
-        lines.append("")
-
+    focus_block = ""
     if focus:
-        lines.append("*🎯 Focus for next week:*")
-        for f in focus:
-            lines.append(f"• {f}")
-        lines.append("")
+        focus_items = "".join(f"<li style='margin-bottom:6px;'>{f}</li>" for f in focus)
+        focus_block = f"""
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+               style="margin-top:18px; background:#fff8e6; border-radius:10px; border-left:4px solid #e0a63e;">
+            <tr>
+                <td style="padding:12px 16px;">
+                    <span style="font-weight:700; color:#8a6516; font-size:13px;">🎯 FOCUS FOR NEXT WEEK</span>
+                    <ul style="color:#6b5426; font-size:13px; margin:8px 0 0 0; padding-left:18px; line-height:1.5;">
+                        {focus_items}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        """
 
-    lines.append("_Not medical advice — synthesized from your last 7 daily digests._")
-
-    return "\n".join(lines)
+    return f"""
+    <html>
+    <body style="margin:0; padding:0; background:#eef1f5; font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5; padding: 24px 0;">
+            <tr>
+                <td align="center">
+                    <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+                           style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+                        <tr>
+                            <td style="background: linear-gradient(135deg, #6a5acd, #3a7ca5); padding: 24px 28px;">
+                                <div style="color:#ffffff; font-size:20px; font-weight:700;">🗓️ Weekly Glucose Digest</div>
+                                <div style="color:#e0e8f5; font-size:13px; margin-top:2px;">{week_range_str}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 24px 28px 8px 28px;">
+                                <div style="font-size:15px; color:#2a2f36; line-height:1.6;">
+                                    <span style="font-size:18px;">{mood['emoji']}</span>
+                                    <span style="font-weight:600;">{overall}</span>
+                                </div>
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="8" style="margin: 20px 0;">
+                                    <tr>{stat_cells}</tr>
+                                </table>
+                                {day_cards}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 28px 8px 28px;">
+                                <div style="font-size:12px; font-weight:700; color:#8a93a3; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:10px;">Patterns This Week</div>
+                                {pattern_cards}
+                                {focus_block}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 28px 8px 28px;">
+                                <img src="cid:pie_chart" style="width:100%; border-radius:10px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 28px 24px 28px;">
+                                <img src="cid:trend_chart" style="width:100%; border-radius:10px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 16px 28px; background:#f7f9fb; border-top:1px solid #eceff3;">
+                                <div style="font-size:11px; color:#a3aab6; line-height:1.5;">
+                                    Not medical advice — a plain-language recap synthesized from your last 7 daily digests.
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    """
 
 
 # ---------- Main ----------
@@ -270,21 +356,24 @@ def main():
     end_date = daily_records[-1]["date"]
     week_range_str = f"{start_date} to {end_date}"
 
-    print("\nBuilding WhatsApp message...")
-    message_text = render_weekly_whatsapp_message(weekly, week_agg, week_range_str)
-
-    print("\nSending WhatsApp text message...")
-    send_whatsapp_text(message_text)
+    subject = f"🗓️ Nightscout Weekly Digest — {start_date} to {end_date}"
 
     print("\nGenerating pie chart...")
     pie_png = build_pie_chart(week_agg.get("week_low"), week_agg.get("week_tir"), week_agg.get("week_high"))
-    if pie_png:
-        send_whatsapp_image(pie_png, caption="🥧 Time-in-range breakdown", filename=f"weekly_pie_{end_date}.png")
 
     print("\nGenerating daily trend chart...")
     trend_png = build_daily_trend_chart(week_agg.get("daily_points"))
+
+    print("\nBuilding HTML email...")
+    html_body = render_weekly_html_email(weekly, week_agg, week_range_str)
+
+    print("\nSending email...")
+    images = {}
+    if pie_png:
+        images["pie_chart"] = pie_png
     if trend_png:
-        send_whatsapp_image(trend_png, caption="📊 Daily average trend", filename=f"weekly_trend_{end_date}.png")
+        images["trend_chart"] = trend_png
+    send_email(subject, html_body, images=images if images else None)
 
     print("\n===================================")
     print(" Done")
