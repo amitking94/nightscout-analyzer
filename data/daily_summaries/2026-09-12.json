@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-12",
+  "analysis": {
+    "overall": "You spent 78% of the day in range with a strong average of 132 mg/dL, though higher-carb meals led to noticeable peaks above 200 mg/dL after breakfast, lunch, and late dinner.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "8:57 AM",
+        "title": "Breakfast spike from Rice and Kadi",
+        "description": "After eating 75g of carbs, glucose rose steadily over two hours to a peak of 204 mg/dL before small automated corrections brought it back down.",
+        "type": "high"
+      },
+      {
+        "time": "12:55 PM",
+        "title": "Lunch peak and afternoon drop",
+        "description": "A 50g carb lunch drove glucose up to 209 mg/dL around 2:11 PM, but insulin activity brought levels back into range and down near 70 mg/dL by late afternoon.",
+        "type": "meal"
+      },
+      {
+        "time": "9:29 PM",
+        "title": "Late evening rise",
+        "description": "Carbs eaten across two late-evening snacks pushed glucose up to the day's peak of 214 mg/dL near midnight, taking a couple of hours to settle.",
+        "type": "high"
+      },
+      {
+        "time": "5:09 AM",
+        "title": "Early morning dip",
+        "description": "Glucose gently drifted down to 68 mg/dL during sleep before temporary basal adjustments helped bring numbers back into a safe range.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Giving your meal bolus a few extra minutes before higher-carb meals like rice may help blunt those peaks above 200 mg/dL."
+  },
+  "stats": {
+    "avg": 132,
+    "min": 68,
+    "max": 214,
+    "pct_in_range": 78,
+    "pct_low": 2,
+    "pct_high": 20,
+    "current": 117
+  }
+}
