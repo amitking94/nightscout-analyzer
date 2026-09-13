@@ -26,7 +26,8 @@ SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
 SMTP_USER = os.environ["SMTP_USER"]              # the email address sending the digest
 SMTP_PASSWORD = os.environ["SMTP_PASSWORD"]      # app password, not your regular login password
-EMAIL_TO = os.environ["EMAIL_TO"]                # where the digest should be sent
+EMAIL_TO_RAW = os.environ["EMAIL_TO"]  # comma-separated list, e.g. "a@example.com,b@example.com"
+EMAIL_TO_LIST = [addr.strip() for addr in EMAIL_TO_RAW.split(",") if addr.strip()]
 
 
 # ---------- Nightscout ----------
@@ -257,8 +258,8 @@ def build_glucose_chart(entries, treatments):
 
     ax.set_ylabel("Glucose (mg/dL)")
     ax.set_ylim(bottom=min(30, min(values) - 20), top=max(values) + 40)
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%I:%M %p"))
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%I:%M %p", tz=IST))
+    ax.xaxis.set_major_locator(mdates.HourLocator(interval=3, tz=IST))
     fig.autofmt_xdate(rotation=45)
     ax.set_title("Last 24 Hours — Glucose Trend (IST)")
     ax.grid(True, alpha=0.25)
@@ -425,7 +426,7 @@ def send_email(subject, html_body, images=None):
     msg = MIMEMultipart("related")
     msg["Subject"] = subject
     msg["From"] = SMTP_USER
-    msg["To"] = EMAIL_TO
+    msg["To"] = ", ".join(EMAIL_TO_LIST)
 
     msg.attach(MIMEText(html_body, "html"))
 
@@ -439,9 +440,9 @@ def send_email(subject, html_body, images=None):
     with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
         server.starttls()
         server.login(SMTP_USER, SMTP_PASSWORD)
-        server.sendmail(SMTP_USER, [EMAIL_TO], msg.as_string())
+        server.sendmail(SMTP_USER, EMAIL_TO_LIST, msg.as_string())
 
-    print(f"Email sent to {EMAIL_TO}")
+    print(f"Email sent to {', '.join(EMAIL_TO_LIST)}")
 
 
 # ---------- Daily summary persistence (for the weekly digest) ----------
