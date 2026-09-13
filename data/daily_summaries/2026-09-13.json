@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-13",
+  "analysis": {
+    "overall": "You had a fantastic day with 96% time in range and an average glucose of 119 mg/dL. Aside from a delayed rise after dinner, your system handled meals and overnight corrections smoothly.",
+    "mood": "great",
+    "events": [
+      {
+        "time": "1:36 PM",
+        "title": "Lunch bolus dip",
+        "description": "Taking your meal bolus while glucose was already drifting down caused a brief dip to 64 mg/dL before the 50g of carbs kicked in and leveled you out.",
+        "type": "low"
+      },
+      {
+        "time": "5:25 PM",
+        "title": "Afternoon steep drop",
+        "description": "Insulin for a 20g snack pulled your glucose down quickly from 175 mg/dL to 68 mg/dL over an hour, though a quick temp target helped prevent a deeper low.",
+        "type": "low"
+      },
+      {
+        "time": "7:30 PM",
+        "title": "Dinner's delayed peak",
+        "description": "Carbs eaten in two waves caused an initial dip followed by a late rise to 199 mg/dL around 9:45 PM, which needed a few small corrections to bring down.",
+        "type": "high"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Steady overnight line",
+        "description": "Small automated corrections gently flattened a slight 2 AM bump, keeping you comfortably between 90 and 130 mg/dL until morning.",
+        "type": "stable"
+      },
+      {
+        "time": "10:40 AM",
+        "title": "Late morning breakfast",
+        "description": "A 30g carb meal and 2u bolus brought your low-ish morning baseline smoothly up to rest near 155 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Dinner carbs took longer than expected to digest, causing an early drop followed by a late peak\u2014consider splitting or delaying your meal bolus."
+  },
+  "stats": {
+    "avg": 119,
+    "min": 64,
+    "max": 199,
+    "pct_in_range": 96,
+    "pct_low": 2,
+    "pct_high": 2,
+    "current": 154
+  }
+}
