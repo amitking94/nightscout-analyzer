@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-14",
+  "analysis": {
+    "overall": "It was a bit of a roller-coaster day with a post-lunch peak and a late-evening low that rebounded overnight, but your readings smoothed out nicely by morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:42 PM",
+        "title": "Post-lunch high",
+        "description": "Glucose peaked at 228 mg/dL three hours after lunch, requiring several small corrections to bring it back down.",
+        "type": "high"
+      },
+      {
+        "time": "10:06 PM",
+        "title": "Post-dinner low",
+        "description": "Insulin outpaced carb absorption after dinner, driving glucose down to a low of 65 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "12:13 AM",
+        "title": "Midnight rebound rise",
+        "description": "Sugars rebounded sharply to 229 mg/dL around midnight, likely from treating the low or delayed carb digestion.",
+        "type": "high"
+      },
+      {
+        "time": "3:14 AM",
+        "title": "Brief early-morning bump",
+        "description": "A quick rise up to 203 mg/dL was promptly caught with corrections, clearing the way for a smooth rest of the night.",
+        "type": "high"
+      },
+      {
+        "time": "10:45 AM",
+        "title": "Pump site change & smooth morning",
+        "description": "Following a mid-morning pump site change and profile switch, glucose stayed very steady in range through noon.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on post-dinner insulin timing to avoid a sharp dip followed by a midnight rebound."
+  },
+  "stats": {
+    "avg": 144,
+    "min": 65,
+    "max": 229,
+    "pct_in_range": 69,
+    "pct_low": 2,
+    "pct_high": 29,
+    "current": 131
+  }
+}
