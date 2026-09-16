@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-16",
+  "analysis": {
+    "overall": "A challenging 24 hours marked by stubborn highs overnight following a late meal, alongside mild lows caused by stacked correction insulin.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "5:50 PM",
+        "title": "Late afternoon drop",
+        "description": "Multiple small corrections aimed at a persistent high finally caught up around 4:30 PM, pulling glucose down to 64 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "9:58 PM",
+        "title": "Late dinner spike",
+        "description": "Bolusing 4.1u for a 45g late dinner, followed shortly by a extra carb correction, sparked a steep upward trend into the night.",
+        "type": "meal"
+      },
+      {
+        "time": "3:14 AM",
+        "title": "Overnight peak",
+        "description": "Glucose hit 249 mg/dL during the night and resisted initial corrections, keeping readings elevated until well after 4:00 AM.",
+        "type": "high"
+      },
+      {
+        "time": "7:12 AM",
+        "title": "Morning low",
+        "description": "The tail end of overnight correction insulin drove readings down to a low of 62 mg/dL before breakfast.",
+        "type": "low"
+      },
+      {
+        "time": "8:40 AM",
+        "title": "Breakfast handling",
+        "description": "Bolusing 6.1u for 65g of carbs helped keep the breakfast rise controlled, peaking gently under 180 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Be cautious with stacking multiple small correction boluses close together, as active insulin built up and caused sharp drops in both the afternoon and early morning."
+  },
+  "stats": {
+    "avg": 149,
+    "min": 62,
+    "max": 249,
+    "pct_in_range": 54,
+    "pct_low": 8,
+    "pct_high": 38,
+    "current": 160
+  }
+}
