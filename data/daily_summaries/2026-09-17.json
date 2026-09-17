@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-17",
+  "analysis": {
+    "overall": "A strong day overall with 91% time in range, highlighted by great breakfast coverage and a very steady night, despite a stubborn rise above 200 mg/dL late yesterday evening.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "12:25 PM",
+        "title": "Smooth lunch response",
+        "description": "Your 60g carb lunch peaked at a modest 173 mg/dL about an hour later before gently returning to target range.",
+        "type": "meal"
+      },
+      {
+        "time": "8:32 PM",
+        "title": "Late evening spike",
+        "description": "Glucose climbed steadily after your evening meal, reaching the day's high of 215 mg/dL around 10:20 PM despite multiple micro-corrections.",
+        "type": "high"
+      },
+      {
+        "time": "5:30 AM",
+        "title": "Rock-solid overnight baseline",
+        "description": "Glucose settled smoothly into the mid-70s to 80s for several hours straight through early morning.",
+        "type": "stable"
+      },
+      {
+        "time": "8:37 AM",
+        "title": "Well-matched breakfast bolus",
+        "description": "A 6u bolus for 65g of carbs kept your morning peak well controlled at just 144 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how evening meals seem to take longer to settle\u2014you might see slower insulin action during late hours."
+  },
+  "stats": {
+    "avg": 135,
+    "min": 73,
+    "max": 215,
+    "pct_in_range": 91,
+    "pct_low": 0,
+    "pct_high": 9,
+    "current": 152
+  }
+}
