@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-18",
+  "analysis": {
+    "overall": "You had a strong day with 84% time in range, anchored by rock-solid overnight stability and quick meal recoveries, despite a late-evening spike following dinner.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:22 PM",
+        "title": "Smooth lunch baseline",
+        "description": "Your 50g lunch bolus matched your meal nicely, keeping glucose steady between 88\u2013110 mg/dL without any significant spike.",
+        "type": "stable"
+      },
+      {
+        "time": "9:21 PM",
+        "title": "Late dinner spike",
+        "description": "Glucose was already trending up when you ate dinner, causing a steep climb that peaked at 265 mg/dL late into the evening.",
+        "type": "high"
+      },
+      {
+        "time": "3:30 AM",
+        "title": "Overnight recovery",
+        "description": "Correction doses gradually pulled your high evening numbers back down, setting you up for an extremely flat baseline around 90 mg/dL through the rest of the night.",
+        "type": "stable"
+      },
+      {
+        "time": "8:30 AM",
+        "title": "Breakfast peak and quick return",
+        "description": "Morning carbs bumped your blood sugar up to 169 mg/dL, but the bolus worked effectively to bring you back down to range within an hour.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for upward trends before dinner\u2014eating while glucose is already rising makes late-night spikes much harder to prevent."
+  },
+  "stats": {
+    "avg": 138,
+    "min": 88,
+    "max": 265,
+    "pct_in_range": 84,
+    "pct_low": 0,
+    "pct_high": 16,
+    "current": 140
+  }
+}
