@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-19",
+  "analysis": {
+    "overall": "You spent 74% of the day in range, but faced similar patterns at both dinner and breakfast where initial dips or low baselines were followed by stubborn spikes over 200 mg/dL.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:30 PM",
+        "title": "Afternoon correction",
+        "description": "After hovering at the bottom of your range near 76 mg/dL, a few small corrections brought you smoothly up to 163 mg/dL before leveling off.",
+        "type": "stable"
+      },
+      {
+        "time": "8:43 PM",
+        "title": "Dinner spike after brief dip",
+        "description": "Your 50g dinner bolus initially caused a quick dip to 75 mg/dL, but as the meal digested, glucose surged up to the day's high of 230 mg/dL.",
+        "type": "high"
+      },
+      {
+        "time": "5:00 AM",
+        "title": "Early morning low",
+        "description": "The overnight corrections working on the late-night high eventually overshot, holding your glucose low around 63-68 mg/dL until 6:00 AM.",
+        "type": "low"
+      },
+      {
+        "time": "8:22 AM",
+        "title": "Post-breakfast high",
+        "description": "Eating 50g of carbs starting from a low baseline of 70 mg/dL triggered a rapid rise, keeping levels above 200 mg/dL through mid-morning.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how larger meals are digesting relative to your insulin timing, as both 50g carb entries led to late post-meal spikes."
+  },
+  "stats": {
+    "avg": 140,
+    "min": 63,
+    "max": 230,
+    "pct_in_range": 74,
+    "pct_low": 5,
+    "pct_high": 21,
+    "current": 173
+  }
+}
