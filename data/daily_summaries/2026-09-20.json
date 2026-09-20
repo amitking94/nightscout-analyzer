@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-20",
+  "analysis": {
+    "overall": "You had a solid day with 78% time in range and a beautifully steady night, though both main meals triggered sharp spikes over 200 mg/dL that required follow-up insulin.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:48 PM",
+        "title": "Early afternoon low",
+        "description": "Glucose drifted down to a brief low of 68 mg/dL before quickly bouncing back right before lunch.",
+        "type": "low"
+      },
+      {
+        "time": "2:43 PM",
+        "title": "Post-lunch surge",
+        "description": "A 50g carb meal coming right off the low pushed levels up to 206 mg/dL, though insulin brought it back into target within an hour.",
+        "type": "high"
+      },
+      {
+        "time": "10:09 PM",
+        "title": "Extended dinner rise",
+        "description": "Carbs from dinner caused a slow-building high peaking at 234 mg/dL, taking multiple small corrections before finally coming down overnight.",
+        "type": "high"
+      },
+      {
+        "time": "6:00 AM",
+        "title": "Smooth overnight baseline",
+        "description": "Blood sugar stayed in a textbook flat line between 80 and 100 mg/dL all through the night.",
+        "type": "stable"
+      },
+      {
+        "time": "11:19 AM",
+        "title": "Breakfast spike and quick drop",
+        "description": "A 35g morning meal led to a steep climb to 235 mg/dL, but a prompt follow-up bolus sent levels dropping straight back toward range.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Giving meal boluses a bit earlier before eating could help smooth out those fast post-meal spikes."
+  },
+  "stats": {
+    "avg": 140,
+    "min": 68,
+    "max": 235,
+    "pct_in_range": 78,
+    "pct_low": 1,
+    "pct_high": 21,
+    "current": 152
+  }
+}
