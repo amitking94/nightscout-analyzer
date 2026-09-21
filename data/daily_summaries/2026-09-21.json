@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-21",
+  "analysis": {
+    "overall": "You spent 77% of the day in range with a strong morning baseline, though late carb absorption after dinner and breakfast caused extended high peaks that took repeated corrections to resolve.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:00 PM",
+        "title": "Post-lunch elevation",
+        "description": "After a 60g carb lunch, glucose steadily climbed and hovered around 185 mg/dL through mid-afternoon despite several correction doses.",
+        "type": "high"
+      },
+      {
+        "time": "9:45 PM",
+        "title": "Post-dinner drop",
+        "description": "Insulin outpaced dinner carbs initially, dropping glucose to a brief low point of 88 mg/dL before the remaining food absorbed.",
+        "type": "stable"
+      },
+      {
+        "time": "11:45 PM",
+        "title": "Late night peak",
+        "description": "Delayed absorption from dinner carbs caused a high spike up to 213 mg/dL, keeping levels elevated well into the early morning.",
+        "type": "high"
+      },
+      {
+        "time": "5:30 AM",
+        "title": "Overnight recovery",
+        "description": "Continuous micro-corrections and basal coverage successfully brought glucose back down into a steady 90\u2013100 mg/dL range before waking.",
+        "type": "stable"
+      },
+      {
+        "time": "10:50 AM",
+        "title": "Mid-morning rebound peak",
+        "description": "Breakfast carbs (70g) created a delayed second wave, driving glucose up to 200 mg/dL before dropping back down by noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how larger carbohydrate meals (dinner and breakfast) triggered delayed secondary spikes 2\u20133 hours later, requiring multiple correction doses."
+  },
+  "stats": {
+    "avg": 149,
+    "min": 88,
+    "max": 213,
+    "pct_in_range": 77,
+    "pct_low": 0,
+    "pct_high": 23,
+    "current": 153
+  }
+}
