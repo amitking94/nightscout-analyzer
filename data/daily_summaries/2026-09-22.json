@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-22",
+  "analysis": {
+    "overall": "You spent 85% of the day in range with stable numbers overnight, though a delayed rise after breakfast caused a late-morning peak.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "5:24 PM",
+        "title": "Smooth afternoon drift",
+        "description": "Lunch insulin gently brought you down to a low point of 75 mg/dL. Your pump throttled back basal delivery, allowing you to level off safely without needing extra carbs.",
+        "type": "low"
+      },
+      {
+        "time": "10:18 PM",
+        "title": "Post-dinner creep",
+        "description": "After your 40g dinner, glucose steadily climbed to a peak of 203 mg/dL. It took several small micro-corrections over a few hours to work it back down into range.",
+        "type": "high"
+      },
+      {
+        "time": "5:25 AM",
+        "title": "Dawn rise corrected",
+        "description": "A brief early morning rise pushed you up to 157 mg/dL, but prompt small boluses brought you back down to a steady 90\u2013100 mg/dL well before breakfast.",
+        "type": "high"
+      },
+      {
+        "time": "11:22 AM",
+        "title": "Delayed breakfast spike",
+        "description": "Your 60g breakfast bolus initially caused a quick drop to 94 mg/dL before the food hit, triggering a sharp surge up to 246 mg/dL that required several correction doses to turn around.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for a delayed curve at breakfast\u2014if insulin acts faster than your food absorbs, you might see an initial drop followed by a late spike."
+  },
+  "stats": {
+    "avg": 142,
+    "min": 75,
+    "max": 246,
+    "pct_in_range": 85,
+    "pct_low": 0,
+    "pct_high": 15,
+    "current": 167
+  }
+}
