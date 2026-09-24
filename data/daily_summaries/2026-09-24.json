@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-24",
+  "analysis": {
+    "overall": "You spent a solid portion of the day in range, but managed a couple of notable low dips during the early morning hours and some post-meal climbing toward late morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "12:06 PM",
+        "title": "High start",
+        "description": "The day kicked off with glucose elevated around 243 mg/dL, which slowly drifted down over the next hour and a half.",
+        "type": "high"
+      },
+      {
+        "time": "03:12 AM",
+        "title": "Early morning low",
+        "description": "Glucose dropped down to 53 mg/dL before recovering nicely with temporary basals and automated adjustments.",
+        "type": "low"
+      },
+      {
+        "time": "08:43 AM",
+        "title": "Breakfast carb coverage",
+        "description": "Took a meal bolus for 40g of carbs while sitting low at 57 mg/dL, leading to a steady climb back into range within an hour.",
+        "type": "meal"
+      },
+      {
+        "time": "10:30 AM",
+        "title": "Late morning peak",
+        "description": "Glucose leveled out around 200 mg/dL following the morning meals and corrections before starting a downward trend around 11:00 AM.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for overnight drifting and early morning lows; you had a couple of dips down near 50 mg/dL that required rapid automation recovery."
+  },
+  "stats": {
+    "avg": 124,
+    "min": 53,
+    "max": 243,
+    "pct_in_range": 81,
+    "pct_low": 10,
+    "pct_high": 9,
+    "current": 128
+  }
+}
