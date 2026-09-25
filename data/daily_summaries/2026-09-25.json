@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-25",
+  "analysis": {
+    "overall": "You had a strong day with 90% time in range and an average of 109 mg/dL, despite a slow downward drift in the early morning hours.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:36 PM",
+        "title": "Lunch peak",
+        "description": "After a 50g carb meal, glucose climbed steadily over two hours to peak at 178 mg/dL before returning to target.",
+        "type": "high"
+      },
+      {
+        "time": "6:51 PM",
+        "title": "Early evening dip",
+        "description": "Bolusing while glucose was already trending down led to a low of 61 mg/dL, which stabilized shortly after 7:15 PM.",
+        "type": "low"
+      },
+      {
+        "time": "9:18 PM",
+        "title": "Late dinner coverage",
+        "description": "A 60g carb dinner was well-managed with 4.2u of insulin, peaking mildly at 166 mg/dL before settling around 90 mg/dL.",
+        "type": "meal"
+      },
+      {
+        "time": "6:37 AM",
+        "title": "Overnight low drift",
+        "description": "Glucose slowly drifted downward during sleep, staying in the 60\u201370 mg/dL range for several hours and reaching a low of 59 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "10:36 AM",
+        "title": "Late morning meal",
+        "description": "A 40g breakfast bolus kept glucose in check, rising smoothly toward 164 mg/dL by late morning.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on early morning basal levels or late-night activity, as glucose drifted low for several hours before waking."
+  },
+  "stats": {
+    "avg": 109,
+    "min": 59,
+    "max": 178,
+    "pct_in_range": 90,
+    "pct_low": 10,
+    "pct_high": 0,
+    "current": 153
+  }
+}
