@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-26",
+  "analysis": {
+    "overall": "Despite a great overall time in range, the day featured a few stubborn afternoon highs followed by extended low spells that required careful overnight management.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "4:48 PM",
+        "title": "Afternoon peak",
+        "description": "Glucose rose to 189 mg/dL following a series of close-together meal and correction boluses, eventually leveling off before drifting down.",
+        "type": "high"
+      },
+      {
+        "time": "8:25 PM",
+        "title": "Extended low dip",
+        "description": "Levels lingered around the mid-50s for a prolonged stretch before carbs were introduced to help bring things back up.",
+        "type": "low"
+      },
+      {
+        "time": "8:55 PM",
+        "title": "Evening meal recovery",
+        "description": "A 40g carb intake combined with a 4.1u bolus successfully nudged glucose out of the low zone and back into a stable upward trend.",
+        "type": "meal"
+      },
+      {
+        "time": "11:21 PM",
+        "title": "Late night drop",
+        "description": "A sharp downward trend brought levels down from 178 to 141 mg/dL rather quickly, which was then managed through overnight adjustments.",
+        "type": "stable"
+      },
+      {
+        "time": "7:54 AM",
+        "title": "Morning dip",
+        "description": "Early morning hours saw a gradual downward drift into the 60s, which stabilized nicely before breakfast time.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on insulin stacking during the late afternoon hours to avoid those stubborn highs and subsequent low stretches."
+  },
+  "stats": {
+    "avg": 120,
+    "min": 54,
+    "max": 189,
+    "pct_in_range": 87,
+    "pct_low": 8,
+    "pct_high": 5,
+    "current": 85
+  }
+}
