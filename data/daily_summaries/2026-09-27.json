@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-27",
+  "analysis": {
+    "overall": "You spent 90% of the day in range with a great average of 106 mg/dL, though the day was marked by steep drops into low territory after dinner and late morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "10:22 PM",
+        "title": "Post-dinner low",
+        "description": "Following a 45g carb dinner and full meal bolus at 9:30 PM, glucose dropped rapidly to 63 mg/dL and hovered low for nearly an hour.",
+        "type": "low"
+      },
+      {
+        "time": "8:36 AM",
+        "title": "Morning dip from stacked corrections",
+        "description": "Multiple small correction boluses given between 7:25 AM and 8:00 AM pulled your glucose down to 68 mg/dL right before breakfast.",
+        "type": "low"
+      },
+      {
+        "time": "11:09 AM",
+        "title": "Breakfast peak and fast drop",
+        "description": "Breakfast pushed your readings up to the daily high of 171 mg/dL before active insulin and corrections triggered a rapid drop back down to 59 mg/dL by noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking correction boluses when glucose is hovering around 110-120 mg/dL, as it led to steep drops twice today."
+  },
+  "stats": {
+    "avg": 106,
+    "min": 57,
+    "max": 171,
+    "pct_in_range": 90,
+    "pct_low": 10,
+    "pct_high": 0,
+    "current": 59
+  }
+}
