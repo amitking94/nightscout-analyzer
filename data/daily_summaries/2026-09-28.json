@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-28",
+  "analysis": {
+    "overall": "You spent 89% of your day in range with a beautifully flat overnight period, though stacking small correction doses after meals led to a couple of steep drops later on.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:50 PM",
+        "title": "Post-lunch peak",
+        "description": "Glucose rose to 186 mg/dL following your afternoon meal and a series of small stacked correction doses.",
+        "type": "high"
+      },
+      {
+        "time": "10:05 PM",
+        "title": "Post-dinner low",
+        "description": "After a 50g carb dinner bolus, levels dipped down to 64 mg/dL before climbing back up ahead of bedtime.",
+        "type": "low"
+      },
+      {
+        "time": "3:00 AM",
+        "title": "Smooth overnight line",
+        "description": "Your numbers stayed beautifully stable and flat between 75 and 100 mg/dL all through the night.",
+        "type": "stable"
+      },
+      {
+        "time": "7:45 AM",
+        "title": "Waking drift low",
+        "description": "Glucose gradually drifted down to 57 mg/dL before recovering on its own as your morning got underway.",
+        "type": "low"
+      },
+      {
+        "time": "10:15 AM",
+        "title": "Breakfast spike and midday crash",
+        "description": "Breakfast and a few closely spaced correction doses bumped you up to 185 mg/dL before sending you down to 54 mg/dL at noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on stacking correction doses during slow meal rises, as active insulin can catch up and cause sharp drops later."
+  },
+  "stats": {
+    "avg": 109,
+    "min": 54,
+    "max": 186,
+    "pct_in_range": 89,
+    "pct_low": 9,
+    "pct_high": 2,
+    "current": 54
+  }
+}
