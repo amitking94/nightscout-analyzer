@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-30",
+  "analysis": {
+    "overall": "You spent 88% of the day in range with a steady 126 mg/dL average. Late-evening eating brought a couple of peaks overnight, but your morning rebounded nicely into a smooth flatline.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:57 PM",
+        "title": "Post-lunch dip",
+        "description": "After a 65g lunch bolus, glucose drifted down to a daily low of 63 mg/dL before gently coming back up into range.",
+        "type": "low"
+      },
+      {
+        "time": "9:22 PM",
+        "title": "Late evening spike",
+        "description": "Glucose rose rapidly to a high of 214 mg/dL around dinner time, needing several small corrections along with your meal bolus.",
+        "type": "high"
+      },
+      {
+        "time": "12:44 AM",
+        "title": "Midnight rebound",
+        "description": "Delayed digestion from late carbs drove glucose back up to 203 mg/dL overnight before additional corrections brought it down.",
+        "type": "high"
+      },
+      {
+        "time": "5:00 AM",
+        "title": "Steady morning baseline",
+        "description": "Once the overnight corrections settled, levels stayed remarkably flat between 80 and 110 mg/dL through wake-up time.",
+        "type": "stable"
+      },
+      {
+        "time": "8:36 AM",
+        "title": "Breakfast handling",
+        "description": "A 40g carb breakfast pre-bolus was timed well, keeping your peak below 140 mg/dL with a smooth descent.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on late-evening meals, as delayed carb absorption caused a second rise around midnight."
+  },
+  "stats": {
+    "avg": 126,
+    "min": 63,
+    "max": 214,
+    "pct_in_range": 88,
+    "pct_low": 3,
+    "pct_high": 10,
+    "current": 108
+  }
+}
