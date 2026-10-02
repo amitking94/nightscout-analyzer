@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-02",
+  "analysis": {
+    "overall": "You had a very solid day with 95% time in range and a low peak of just 167 mg/dL. The main thing to note was a couple of mild dips into the mid-60s right before eating.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "3:27 PM",
+        "title": "Mid-afternoon dip",
+        "description": "Glucose drifted down to 66 mg/dL before a 40g carb treatment and bolus brought you safely back into range.",
+        "type": "low"
+      },
+      {
+        "time": "9:19 PM",
+        "title": "Evening high point",
+        "description": "After evening carbs, blood sugar topped out at 167 mg/dL before micro-corrections brought it back down before sleep.",
+        "type": "high"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Flat overnight baseline",
+        "description": "Glucose remained remarkably steady around 80\u2013100 mg/dL throughout the entire night.",
+        "type": "stable"
+      },
+      {
+        "time": "11:00 AM",
+        "title": "Late morning low",
+        "description": "Glucose gradually drifted down to 67 mg/dL ahead of your meal, prompting a temporary high target.",
+        "type": "low"
+      },
+      {
+        "time": "11:37 AM",
+        "title": "Lunch & site change recovery",
+        "description": "Covered 65g carbs with 4.4u alongside a pump site change, bringing you smoothly back up to 123 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Notice if you tend to drift low late in the morning or mid-afternoon when meals are delayed."
+  },
+  "stats": {
+    "avg": 106,
+    "min": 66,
+    "max": 167,
+    "pct_in_range": 95,
+    "pct_low": 5,
+    "pct_high": 0,
+    "current": 123
+  }
+}
