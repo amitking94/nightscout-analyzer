@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-03",
+  "analysis": {
+    "overall": "You had a fantastic day with 96% time in range and an average glucose of 124 mg/dL. Aside from a couple of temporary peaks following snacks and meals, your levels bounced back quickly without staying high.",
+    "mood": "great",
+    "events": [
+      {
+        "time": "3:52 PM",
+        "title": "Afternoon rise",
+        "description": "Glucose drifted up to a day-high of 193 mg/dL, prompting several small corrections that brought you steadily back down over the next two hours.",
+        "type": "high"
+      },
+      {
+        "time": "6:55 PM",
+        "title": "Brief evening low",
+        "description": "The momentum from the afternoon drop caused a momentary dip to 69 mg/dL, but a temp target helped bring you back into target range within 30 minutes.",
+        "type": "low"
+      },
+      {
+        "time": "11:28 PM",
+        "title": "Late-night snack spike",
+        "description": "A late 15g snack combined with a few correction doses caused glucose to climb to 189 mg/dL before settling down after midnight.",
+        "type": "high"
+      },
+      {
+        "time": "3:00 AM",
+        "title": "Rock-solid overnight baseline",
+        "description": "Your numbers remained exceptionally steady right around 100\u2013110 mg/dL through the entire night.",
+        "type": "stable"
+      },
+      {
+        "time": "11:47 AM",
+        "title": "Late-morning meal rise",
+        "description": "A 50g carb meal raised glucose to 178 mg/dL, where your bolus successfully caught it and started bringing it down.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how late-night snacks tend to linger into elevated readings right at bedtime\u2014bolusing earlier or keeping late carbs minimal can help keep nights even smoother."
+  },
+  "stats": {
+    "avg": 124,
+    "min": 69,
+    "max": 193,
+    "pct_in_range": 96,
+    "pct_low": 0,
+    "pct_high": 4,
+    "current": 159
+  }
+}
