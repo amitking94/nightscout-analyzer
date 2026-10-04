@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-04",
+  "analysis": {
+    "overall": "You had an impressive day with 98% time in range and well-managed meal peaks, though a post-breakfast drop to 62 mg/dL required a quick recovery.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:13 PM",
+        "title": "Smooth lunch coverage",
+        "description": "A 65g carb lunch paired with 4.6u insulin kept your levels very stable, peaking gently at 138 mg/dL before settling back to target.",
+        "type": "meal"
+      },
+      {
+        "time": "6:54 PM",
+        "title": "Evening drift caught early",
+        "description": "After a minor spike to 156 mg/dL, insulin action pushed your glucose down to 76 mg/dL, but 15g of rescue carbs stabilized you smoothly.",
+        "type": "low"
+      },
+      {
+        "time": "9:02 PM",
+        "title": "Dinner peak managed well",
+        "description": "Bolusing 4.1u for 45g of dinner carbs resulted in a brief bump to 150 mg/dL before leveling off cleanly into the evening.",
+        "type": "meal"
+      },
+      {
+        "time": "11:44 PM",
+        "title": "Bedtime correction",
+        "description": "A late-night rise to 158 mg/dL was addressed with small correction boluses, setting up a flat and predictable overnight period.",
+        "type": "high"
+      },
+      {
+        "time": "11:26 AM",
+        "title": "Post-breakfast drop to 62 mg/dL",
+        "description": "The 4.8u dose for 40g of carbs at breakfast hit harder than expected, pulling glucose down to 62 mg/dL before temp targets helped bring it back up.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on breakfast bolus timing or sizing, as the morning dose led to a sharp dip roughly two hours after eating."
+  },
+  "stats": {
+    "avg": 118,
+    "min": 62,
+    "max": 160,
+    "pct_in_range": 98,
+    "pct_low": 2,
+    "pct_high": 0,
+    "current": 92
+  }
+}
