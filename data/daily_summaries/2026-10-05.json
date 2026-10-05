@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-05",
+  "analysis": {
+    "overall": "You had a fantastic day with 96% of your time spent in range and a steady average glucose of 119 mg/dL. The only real wrinkle was a slight overnight rise that led to a gentle early morning low.",
+    "mood": "great",
+    "events": [
+      {
+        "time": "5:32 PM",
+        "title": "Late afternoon peak",
+        "description": "Blood sugar gradually climbed to 185 mg/dL following afternoon meals and corrections, but a meal bolus brought it smoothly back into target within two hours.",
+        "type": "high"
+      },
+      {
+        "time": "9:22 PM",
+        "title": "Dinner and late snack",
+        "description": "A 50g carb dinner was handled well initially, though a follow-up late snack around 11:20 PM contributed to a slow rise over the midnight hours.",
+        "type": "meal"
+      },
+      {
+        "time": "1:30 AM",
+        "title": "Overnight rise",
+        "description": "Glucose topped out around 184 mg/dL overnight from delayed carb absorption, prompting several small automated micro-corrections.",
+        "type": "high"
+      },
+      {
+        "time": "5:36 AM",
+        "title": "Early morning dip",
+        "description": "The tail end of overnight correction insulin slowly pulled glucose down to 66 mg/dL, where it held flat until breakfast without crashing further.",
+        "type": "low"
+      },
+      {
+        "time": "8:29 AM",
+        "title": "Breakfast peak and recovery",
+        "description": "Bolusing well for your 65g breakfast kept the spike mild, peaking at 150 mg/dL before settling right back down into a steady range.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on late-night snacks, as late carbs can trigger overnight corrections that eventually cause early morning dips."
+  },
+  "stats": {
+    "avg": 119,
+    "min": 66,
+    "max": 185,
+    "pct_in_range": 96,
+    "pct_low": 3,
+    "pct_high": 2,
+    "current": 100
+  }
+}
