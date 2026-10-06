@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-06",
+  "analysis": {
+    "overall": "You maintained an 80% time-in-range today, though managing morning breakfast caused a sharp spike followed by a steady climb into the 200s before eventually coming back down.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "2:19 PM",
+        "title": "Afternoon meal and gradual rise",
+        "description": "An initial meal bolus at 2:19 PM was followed by another carb entry and multiple corrections as glucose slowly crept up past 200 mg/dL over the next couple of hours.",
+        "type": "high"
+      },
+      {
+        "time": "6:28 PM",
+        "title": "Stable evening transition",
+        "description": "After coming down from the afternoon high, a 25g carb meal was well-managed, keeping numbers steady and near the target range through the evening.",
+        "type": "stable"
+      },
+      {
+        "time": "8:48 AM",
+        "title": "Morning sandwich spike",
+        "description": "A cheese veg sandwich breakfast led to a sharp double-up trend and a climb up to nearly 210 mg/dL, requiring several correction boluses to bring back down.",
+        "type": "high"
+      },
+      {
+        "time": "1:00 PM",
+        "title": "Post-correction descent",
+        "description": "Following the morning high and subsequent correction stack, glucose dipped down near 71 mg/dL before stabilizing nicely with the help of automated basal adjustments.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on morning pre-bolus timing for carb-heavy breakfasts to help blunt that sharp initial rise."
+  },
+  "stats": {
+    "avg": 115,
+    "min": 61,
+    "max": 212,
+    "pct_in_range": 80,
+    "pct_low": 7,
+    "pct_high": 13,
+    "current": 83
+  }
+}
