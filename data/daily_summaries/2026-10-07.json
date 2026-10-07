@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-07",
+  "analysis": {
+    "overall": "You had a strong day overall with 84% time in range and smooth overnight stability, though an early morning dip and a late-morning post-breakfast rise required extra attention.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:46 PM",
+        "title": "Afternoon dip and bounce",
+        "description": "Glucose drifted down to 60 mg/dL around lunch, prompting 20g of carbs which nudged you up to a brief peak of 182 mg/dL before settling back down.",
+        "type": "low"
+      },
+      {
+        "time": "9:14 PM",
+        "title": "Well-handled dinner",
+        "description": "Your 50g carb dinner was covered smoothly, keeping glucose well within range and barely exceeding 149 mg/dL.",
+        "type": "meal"
+      },
+      {
+        "time": "7:16 AM",
+        "title": "Early morning low",
+        "description": "Following an infusion site change around 6:45 AM, glucose dropped to a daily low of 58 mg/dL before rising back into target range.",
+        "type": "low"
+      },
+      {
+        "time": "11:50 AM",
+        "title": "Late-morning breakfast spike",
+        "description": "Glucose began climbing a couple of hours after your 8:25 AM breakfast (60g carbs), reaching a peak of 235 mg/dL before corrections started bringing it down.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch for a delayed rise after higher-carb breakfasts like today's to see if timing or pre-bolusing needs a slight adjustment."
+  },
+  "stats": {
+    "avg": 115,
+    "min": 58,
+    "max": 235,
+    "pct_in_range": 84,
+    "pct_low": 7,
+    "pct_high": 9,
+    "current": 185
+  }
+}
