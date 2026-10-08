@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-08",
+  "analysis": {
+    "overall": "You spent a solid 83% of the day in range with an average of 117 mg/dL, though meal doses repeatedly triggered sharp dips into low territory followed by brief rebound peaks.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:30 PM",
+        "title": "Post-lunch peak",
+        "description": "A 60g carb lunch at 1:50 PM led to a gradual rise peaking at 190 mg/dL before small correction boluses brought you back down.",
+        "type": "high"
+      },
+      {
+        "time": "7:20 PM",
+        "title": "Pre-dinner mild low",
+        "description": "Correction insulin from the afternoon slowly drifted your glucose down to a low of 62 mg/dL before dinner.",
+        "type": "low"
+      },
+      {
+        "time": "10:48 PM",
+        "title": "Post-dinner drop",
+        "description": "After dinner, your 3.8u bolus acted quickly, dropping glucose from 142 mg/dL down to 68 mg/dL before stabilizing overnight.",
+        "type": "low"
+      },
+      {
+        "time": "6:50 AM",
+        "title": "Early morning dip",
+        "description": "Glucose drifted down early in the morning to 60 mg/dL before naturally rising as you woke up.",
+        "type": "low"
+      },
+      {
+        "time": "9:46 AM",
+        "title": "Breakfast drop and rebound",
+        "description": "A heavy breakfast dose caused a quick drop to 60 mg/dL, which triggered a swift rebound up to 190 mg/dL before leveling off smoothly around 90 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Pay attention to mealtime timing and corrections, as full boluses tended to cause rapid drops about an hour after eating."
+  },
+  "stats": {
+    "avg": 117,
+    "min": 60,
+    "max": 190,
+    "pct_in_range": 83,
+    "pct_low": 11,
+    "pct_high": 6,
+    "current": 90
+  }
+}
