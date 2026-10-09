@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-09",
+  "analysis": {
+    "overall": "The day featured a few dramatic swings, including a dip into the 50s and a notable morning spike following a connectivity issue, but overall managed a decent amount of time in range.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:22 PM",
+        "title": "Afternoon dip",
+        "description": "Glucose drifted down to a low of 59 mg/dL before temporary basal adjustments and time successfully brought it back up.",
+        "type": "low"
+      },
+      {
+        "time": "8:34 PM",
+        "title": "Evening meal and disconnect",
+        "description": "A 40g carb meal was bolused, but a subsequent 'Pump unreachable' announcement noted a brief connectivity lapse that let levels climb.",
+        "type": "meal"
+      },
+      {
+        "time": "10:14 PM",
+        "title": "Late evening correction",
+        "description": "Glucose reached 195 mg/dL, prompting a temporary target and correction bolus to bring the rise under control.",
+        "type": "high"
+      },
+      {
+        "time": "10:05 AM",
+        "title": "Morning peak",
+        "description": "Following breakfast and another reported pump connection interruption, glucose climbed to a high of 227 mg/dL before steadying.",
+        "type": "high"
+      },
+      {
+        "time": "12:30 PM",
+        "title": "Midday low",
+        "description": "Aggressive correction stacking earlier in the morning led to a steady downward trend, bottoming out around 54 mg/dL by early afternoon.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on pump connectivity alerts to catch accidental delivery interruptions before they lead to significant highs."
+  },
+  "stats": {
+    "avg": 106,
+    "min": 54,
+    "max": 227,
+    "pct_in_range": 69,
+    "pct_low": 21,
+    "pct_high": 10,
+    "current": 58
+  }
+}
