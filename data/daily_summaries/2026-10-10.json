@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-10",
+  "analysis": {
+    "overall": "A varied 24 hours marked by a double-peaked evening spike and a lingering overnight low, though your numbers settled into a much smoother routine by mid-morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "8:00 PM",
+        "title": "Evening dinner spike",
+        "description": "Glucose rose rapidly from the 70s up to a daily high of 218 mg/dL, prompting multiple boluses that pulled numbers down sharply within an hour.",
+        "type": "high"
+      },
+      {
+        "time": "10:00 PM",
+        "title": "Late-night rebound rise",
+        "description": "Numbers rebounded back up above 200 mg/dL late in the evening. Frequent small correction doses eventually cleared the spike by midnight.",
+        "type": "high"
+      },
+      {
+        "time": "3:00 AM",
+        "title": "Extended overnight low",
+        "description": "Glucose drifted down into the mid-50s overnight and stayed low for several hours despite automated basal suspensions before naturally rising at sunrise.",
+        "type": "low"
+      },
+      {
+        "time": "8:52 AM",
+        "title": "Breakfast bump & smooth return",
+        "description": "A 25g carb breakfast caused a moderate rise peaking at 158 mg/dL, which gently returned back down to a baseline of 75 mg/dL by noon.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Pay attention to late-evening fat or protein content that might cause slow-digesting rebound spikes and lead to overnight low drifts."
+  },
+  "stats": {
+    "avg": 104,
+    "min": 53,
+    "max": 218,
+    "pct_in_range": 70,
+    "pct_low": 22,
+    "pct_high": 8,
+    "current": 96
+  }
+}
