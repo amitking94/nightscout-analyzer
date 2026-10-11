@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-11",
+  "analysis": {
+    "overall": "You spent an impressive 92% of your day in range despite a couple of quick glucose swings. A brief evening low and a late-afternoon bump were both handled promptly without throwing off the rest of your day.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "4:45 PM",
+        "title": "Late afternoon rise",
+        "description": "Glucose briefly climbed to 201 mg/dL following a meal and extra corrections, but settled back into target within an hour.",
+        "type": "high"
+      },
+      {
+        "time": "8:30 PM",
+        "title": "Evening low after dinner",
+        "description": "Bolusing for 50g of carbs while sitting at 75 mg/dL caused insulin to hit before the food absorbed, dropping glucose down to 53 mg/dL before carb corrections brought it back up.",
+        "type": "low"
+      },
+      {
+        "time": "2:40 AM",
+        "title": "Overnight stabilization",
+        "description": "Small automated corrections managed a slight rise up to 140 mg/dL, gently leveling you off in target for the rest of the night.",
+        "type": "stable"
+      },
+      {
+        "time": "11:25 AM",
+        "title": "Late morning meal response",
+        "description": "Eating brought levels up to a peak of 176 mg/dL, but your meal bolus brought you back down smoothly to around 100 mg/dL by lunchtime.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "When starting a meal with glucose sitting in the 70s, giving carbs a slight head start before bolusing can help prevent early dips."
+  },
+  "stats": {
+    "avg": 114,
+    "min": 53,
+    "max": 201,
+    "pct_in_range": 92,
+    "pct_low": 6,
+    "pct_high": 2,
+    "current": 106
+  }
+}
