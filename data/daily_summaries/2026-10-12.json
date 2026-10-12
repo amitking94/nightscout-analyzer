@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-12",
+  "analysis": {
+    "overall": "Despite a solid 81% time in range, your day had a roller-coaster morning where a high breakfast spike was met with stacked corrections, resulting in a late-morning low.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "8:34 PM",
+        "title": "Evening spike and site change",
+        "description": "Glucose spiked to 220 mg/dL following evening carbs, coinciding with pump disconnection warnings and a cannula/site change.",
+        "type": "high"
+      },
+      {
+        "time": "1:20 AM",
+        "title": "Overnight stubborn high",
+        "description": "Readings hovered between 160\u2013210 mg/dL for hours, taking multiple small corrections before finally settling into range around 4:00 AM.",
+        "type": "high"
+      },
+      {
+        "time": "9:40 AM",
+        "title": "Breakfast sandwich spike",
+        "description": "A 32g carb breakfast caused a rapid rise up to the day's peak of 238 mg/dL.",
+        "type": "high"
+      },
+      {
+        "time": "11:52 AM",
+        "title": "Post-breakfast low",
+        "description": "Several correction doses delivered back-to-back during the morning spike hit all at once, driving glucose down to a low of 58 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "12:15 PM",
+        "title": "Low recovery",
+        "description": "Taking 20g of carbs brought your levels back up smoothly into normal range.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking multiple correction boluses close together when high after meals to avoid steep drops afterward."
+  },
+  "stats": {
+    "avg": 141,
+    "min": 58,
+    "max": 238,
+    "pct_in_range": 81,
+    "pct_low": 4,
+    "pct_high": 16,
+    "current": 95
+  }
+}
