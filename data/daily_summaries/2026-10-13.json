@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-13",
+  "analysis": {
+    "overall": "You maintained great overall time-in-range despite a stubborn afternoon dip and a few pump connectivity hiccups.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "6:30 PM",
+        "title": "Afternoon dip",
+        "description": "Glucose drifted down to 55 mg/dL, but recovered nicely after taking in some quick carbs and letting the automated basal adjustments kick in.",
+        "type": "low"
+      },
+      {
+        "time": "8:06 AM",
+        "title": "Pump battery change",
+        "description": "Noticed a few 'Pump unreachable' warnings and successfully swapped the battery to get everything communicating smoothly again.",
+        "type": "stable"
+      },
+      {
+        "time": "9:17 AM",
+        "title": "Breakfast rebound",
+        "description": "An extra carb correction shortly after breakfast caused a steady climb up to nearly 200 mg/dL before leveling off and coming back down.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on pump connectivity and battery status to prevent sudden 'unreachable' alerts during meals."
+  },
+  "stats": {
+    "avg": 126,
+    "min": 55,
+    "max": 204,
+    "pct_in_range": 92,
+    "pct_low": 4,
+    "pct_high": 5,
+    "current": 79
+  }
+}
