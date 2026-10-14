@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-14",
+  "analysis": {
+    "overall": "You spent 86% of the day in range with a flat overnight baseline, though heavy meals in the evening and mid-morning caused temporary spikes over 200 mg/dL that needed repeated corrections.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "1:55 PM",
+        "title": "Afternoon dip and flat coast",
+        "description": "An early afternoon drop touched 70 mg/dL, but a 50g lunch balanced it out, keeping glucose steady in the high 70s for hours.",
+        "type": "stable"
+      },
+      {
+        "time": "8:28 PM",
+        "title": "Evening dinner spike",
+        "description": "A 40g meal shot glucose up to a peak of 207 mg/dL, requiring several small correction doses over two hours to pull it back into range.",
+        "type": "high"
+      },
+      {
+        "time": "1:30 AM",
+        "title": "Smooth overnight baseline",
+        "description": "After late-night correction activity settled, glucose stayed nicely parked in the 80\u2013110 mg/dL range until dawn.",
+        "type": "stable"
+      },
+      {
+        "time": "9:05 AM",
+        "title": "Mid-morning rise and steep drop",
+        "description": "Multiple carb entries in quick succession pushed levels up to 220 mg/dL, prompting repeated correction boluses that are now dropping glucose sharply around noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking multiple small correction doses during high peaks, as the cumulative insulin can cause a rapid drop later on."
+  },
+  "stats": {
+    "avg": 122,
+    "min": 70,
+    "max": 220,
+    "pct_in_range": 86,
+    "pct_low": 0,
+    "pct_high": 14,
+    "current": 152
+  }
+}
