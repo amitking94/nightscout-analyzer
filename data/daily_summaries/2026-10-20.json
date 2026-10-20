@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-20",
+  "analysis": {
+    "overall": "You had a strong day with 92% time in range and a remarkably stable night, though a steep late-morning spike broke an otherwise steady trend.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:46 PM",
+        "title": "Post-lunch bump and site change",
+        "description": "Lunch carbs combined with a site change caused a mild rise to 189 mg/dL, but a few micro-corrections brought you back into range fairly quickly.",
+        "type": "high"
+      },
+      {
+        "time": "1:50 AM",
+        "title": "Overnight correction stacking",
+        "description": "Multiple small correction boluses through the late evening pulled down a minor late-night drift without causing a crash.",
+        "type": "stable"
+      },
+      {
+        "time": "5:00 AM",
+        "title": "Rock-solid morning baseline",
+        "description": "Your levels stayed remarkably smooth around 75\u201380 mg/dL all through the early morning hours.",
+        "type": "stable"
+      },
+      {
+        "time": "11:51 AM",
+        "title": "Late-morning breakfast spike",
+        "description": "Despite bolusing for 30g of carbs at 9:50 AM, your glucose shot up to 271 mg/dL two hours later, likely due to delayed carb absorption or pump connection issues.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on how breakfast absorbs tomorrow to see if today's late spike was a one-off delivery issue or a pattern."
+  },
+  "stats": {
+    "avg": 134,
+    "min": 73,
+    "max": 271,
+    "pct_in_range": 92,
+    "pct_low": 0,
+    "pct_high": 8,
+    "current": 271
+  }
+}
