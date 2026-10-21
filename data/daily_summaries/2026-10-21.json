@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-21",
+  "analysis": {
+    "overall": "You had a strong day with 83% time in range, highlighted by a remarkably flat overnight line, though stubborn evening carbs required quite a few extra correction nudges.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "12:00 PM",
+        "title": "Midday high correction",
+        "description": "After starting the period up at 272 mg/dL, your correction and lunch bolus brought you smoothly back into range within an hour.",
+        "type": "high"
+      },
+      {
+        "time": "5:43 PM",
+        "title": "Dinner rise",
+        "description": "A 60g carb meal started off flat but led to a slow, persistent climb up to 219 mg/dL over the following hours.",
+        "type": "meal"
+      },
+      {
+        "time": "11:47 PM",
+        "title": "Late evening correction",
+        "description": "Multiple small correction boluses before bed helped bring a lingering evening elevation back down to target by 2:00 AM.",
+        "type": "high"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Rock-solid overnight baseline",
+        "description": "Your glucose remained impressively stable between 100 and 120 mg/dL for the rest of the night while you slept.",
+        "type": "stable"
+      },
+      {
+        "time": "10:30 AM",
+        "title": "Gentle morning coast",
+        "description": "Levels drifted down into the upper 70s and low 80s later in the morning, holding steady without dropping into a true low.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on dinner meals lingering late into the evening, as they required multiple small corrections to fully settle before bed."
+  },
+  "stats": {
+    "avg": 142,
+    "min": 77,
+    "max": 272,
+    "pct_in_range": 83,
+    "pct_low": 0,
+    "pct_high": 17,
+    "current": 92
+  }
+}
