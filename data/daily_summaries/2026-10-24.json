@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-24",
+  "analysis": {
+    "overall": "You spent 83% of your day in range with a great average of 121 mg/dL, though a few low dips and late-morning stacked corrections caused sharp swings.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "12:27 PM",
+        "title": "Midday low drop",
+        "description": "Glucose dropped sharply to 60 mg/dL right before lunch, but rebounded smoothly back into target as you ate.",
+        "type": "low"
+      },
+      {
+        "time": "8:25 PM",
+        "title": "Post-dinner low after site change",
+        "description": "A 3.1u dinner bolus pulled your glucose down quickly from 184 to 60 mg/dL around the same time you changed your infusion site.",
+        "type": "low"
+      },
+      {
+        "time": "10:22 PM",
+        "title": "Late evening correction spike",
+        "description": "After an undelivered bolus alert and a 30g late snack, glucose climbed to 199 mg/dL before coming down with correction doses.",
+        "type": "high"
+      },
+      {
+        "time": "4:00 AM",
+        "title": "Overnight brief dip",
+        "description": "A quick low reading of 63 mg/dL occurred in early morning sleeping hours, but it self-corrected rapidly back to steady levels.",
+        "type": "low"
+      },
+      {
+        "time": "10:38 AM",
+        "title": "Morning spike to 240 mg/dL",
+        "description": "Stacking two morning carb entries (40g and 15g) alongside frequent small correction boluses pushed glucose to its daily high.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for giving multiple small correction boluses close together when eating back-to-back meals, as active insulin can stack up quickly."
+  },
+  "stats": {
+    "avg": 121,
+    "min": 60,
+    "max": 240,
+    "pct_in_range": 83,
+    "pct_low": 8,
+    "pct_high": 10,
+    "current": 193
+  }
+}
