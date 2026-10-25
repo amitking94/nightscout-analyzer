@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-25",
+  "analysis": {
+    "overall": "You spent a solid 93% of your day in range with a very stable overnight, despite a evening low and a sharp rise after late morning carbs.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:29 PM",
+        "title": "Lunch spike handled smoothly",
+        "description": "After a 50g carb lunch, glucose peaked gently around 171 mg/dL before small automated and manual corrections brought you back under 140 mg/dL.",
+        "type": "meal"
+      },
+      {
+        "time": "9:25 PM",
+        "title": "Post-dinner low",
+        "description": "Insulin for your 30g carb dinner acted quickly, dropping your glucose to a low of 56 mg/dL before carb treatment and temp targets brought you back into range.",
+        "type": "low"
+      },
+      {
+        "time": "11:57 PM",
+        "title": "Late-night rise",
+        "description": "Blood sugar climbed up to 207 mg/dL around midnight, requiring a series of small correction boluses to turn the trend around.",
+        "type": "high"
+      },
+      {
+        "time": "3:00 AM",
+        "title": "Steady overnight baseline",
+        "description": "Once the midnight corrections landed, glucose stayed virtually flat between 100 and 125 mg/dL all night long.",
+        "type": "stable"
+      },
+      {
+        "time": "11:45 AM",
+        "title": "Late morning spike",
+        "description": "A 50g carb meal at 10:43 AM absorbed quickly, driving glucose up to 223 mg/dL and prompting a follow-up correction.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on dinner meal timing or upfront insulin, as dinner bolusing led to a rapid dip this evening."
+  },
+  "stats": {
+    "avg": 125,
+    "min": 56,
+    "max": 223,
+    "pct_in_range": 93,
+    "pct_low": 2,
+    "pct_high": 5,
+    "current": 223
+  }
+}
