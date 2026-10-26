@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-26",
+  "analysis": {
+    "overall": "You spent 87% of the day in range with a very smooth night and morning. Aside from a stubborn high early yesterday afternoon, your treatments and meals were managed smoothly without significant spikes or severe lows.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "1:20 PM",
+        "title": "Stubborn afternoon high",
+        "description": "After an initial high of 222 mg/dL, glucose hovered around 190\u2013202 mg/dL for nearly two hours despite multiple small corrections before finally returning to range around 4:00 PM.",
+        "type": "high"
+      },
+      {
+        "time": "8:32 PM",
+        "title": "Well-managed dinner response",
+        "description": "Dosing for dinner carbs in two batches kept your post-meal peak to a modest 171 mg/dL, returning smoothly to 104 mg/dL by late evening.",
+        "type": "meal"
+      },
+      {
+        "time": "5:42 AM",
+        "title": "Early morning floor dip",
+        "description": "Glucose drifted down during the early hours and touched 70 mg/dL, but held steady at the lower boundary without crashing.",
+        "type": "low"
+      },
+      {
+        "time": "8:38 AM",
+        "title": "Remarkably flat breakfast curve",
+        "description": "A 5u dose for 60g of carbs kept your glucose virtually flat around 100\u2013109 mg/dL throughout the entire morning.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Take note of your breakfast pre-bolus timing today\u2014dosing 5u for 60g carbs resulted in an almost perfectly flat line."
+  },
+  "stats": {
+    "avg": 127,
+    "min": 70,
+    "max": 222,
+    "pct_in_range": 87,
+    "pct_low": 0,
+    "pct_high": 13,
+    "current": 108
+  }
+}
