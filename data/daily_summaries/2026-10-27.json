@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-27",
+  "analysis": {
+    "overall": "You spent 84% of the day in range with a solid average of 135 mg/dL, though post-meal timing led to significant spikes after lunch and dinner, as well as a sharp morning roller coaster.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:05 PM",
+        "title": "Post-lunch peak",
+        "description": "After a 50g carb lunch at 12:49 PM, glucose steadily climbed over two hours to a peak of 220 mg/dL before multiple correction boluses brought it back to baseline.",
+        "type": "high"
+      },
+      {
+        "time": "9:54 PM",
+        "title": "Dinner spike",
+        "description": "A 40g carb dinner at 8:02 PM pushed glucose up to 214 mg/dL before stacked micro-corrections helped ease it back into range overnight.",
+        "type": "high"
+      },
+      {
+        "time": "5:58 AM",
+        "title": "Early morning low",
+        "description": "Glucose drifted low in the quiet early morning hours down to 63 mg/dL, but smoothly rebounded into safe territory within an hour.",
+        "type": "low"
+      },
+      {
+        "time": "9:29 AM",
+        "title": "Breakfast dip and rebound spike",
+        "description": "Insulin for a 70g breakfast acted faster than carb absorption, triggering a low of 61 mg/dL before the delayed carbs pushed glucose up past 200 mg/dL.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Carb absorption lagged behind insulin at breakfast, causing a low followed by a spike\u2014consider pre-bolus timing or meal composition for larger carb loads."
+  },
+  "stats": {
+    "avg": 135,
+    "min": 61,
+    "max": 220,
+    "pct_in_range": 84,
+    "pct_low": 3,
+    "pct_high": 13,
+    "current": 181
+  }
+}
