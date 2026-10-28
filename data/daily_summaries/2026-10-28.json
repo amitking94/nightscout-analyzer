@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-28",
+  "analysis": {
+    "overall": "You had a strong day with 90% time in range and an average glucose of 111 mg/dL, though delayed carb absorption caused spikes after meals alongside an evening low.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "5:27 PM",
+        "title": "Late afternoon peak",
+        "description": "After a 25g snack at 3:17 PM, glucose steadily climbed over two hours to a peak of 200 mg/dL before correction boluses brought it back down.",
+        "type": "high"
+      },
+      {
+        "time": "9:02 PM",
+        "title": "Post-dinner low",
+        "description": "A 1u meal bolus at 7:48 PM caused a swift drop down to 60 mg/dL, requiring a temporary target to help stabilize and recover.",
+        "type": "low"
+      },
+      {
+        "time": "12:18 AM",
+        "title": "Overnight low stretch",
+        "description": "Glucose drifted low around midnight, hovering in the low 60s for about an hour before gently rising back to a baseline around 80 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "8:33 AM",
+        "title": "Breakfast and delayed rise",
+        "description": "Dosed 4.8u for 60g of carbs at 8:33 AM; glucose stayed completely flat for nearly two hours before surging to 175 mg/dL late in the morning.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Carbs seem to be absorbing slowly relative to your boluses, leading to initial dips followed by late spikes\u2014consider tracking meal timing."
+  },
+  "stats": {
+    "avg": 111,
+    "min": 60,
+    "max": 200,
+    "pct_in_range": 90,
+    "pct_low": 7,
+    "pct_high": 3,
+    "current": 145
+  }
+}
