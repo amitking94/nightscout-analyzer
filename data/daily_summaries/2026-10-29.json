@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-29",
+  "analysis": {
+    "overall": "A mix of smooth stretches and tricky shifts today, highlighted by a late-night spike requiring a site change and a prolonged low during your morning fast.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "8:50 PM",
+        "title": "Post-dinner correction dip",
+        "description": "A rising trend around 7:00 PM prompted a few stacked correction doses, which eventually pulled glucose down to 67 mg/dL around 9:00 PM.",
+        "type": "low"
+      },
+      {
+        "time": "11:06 PM",
+        "title": "Late-night spike and site change",
+        "description": "Glucose climbed steeply up to nearly 200 mg/dL around 10:30 PM. Swapping out your pump site and insulin helped restart absorption and safely brought numbers down overnight.",
+        "type": "high"
+      },
+      {
+        "time": "7:20 AM",
+        "title": "Extended morning low",
+        "description": "During your morning fast, readings drifted down into the mid-50s and stayed stubbornly low for a few hours before slowly recovering.",
+        "type": "low"
+      },
+      {
+        "time": "11:30 AM",
+        "title": "Smooth midday recovery",
+        "description": "Glucose comfortably leveled out around 90-120 mg/dL and remained steady through the start of the afternoon.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on basal settings during fasting hours, as morning fasting kept your readings lower than target for several hours."
+  },
+  "stats": {
+    "avg": 116,
+    "min": 55,
+    "max": 198,
+    "pct_in_range": 81,
+    "pct_low": 13,
+    "pct_high": 6,
+    "current": 119
+  }
+}
