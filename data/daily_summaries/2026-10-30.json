@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-30",
+  "analysis": {
+    "overall": "You had a solid day overall with 82% time in range, though a late-night meal caused an extended high peak while you slept.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "10:07 PM",
+        "title": "Late dinner spike",
+        "description": "A 65g carb meal late in the evening sent glucose climbing past 200 mg/dL over the next two hours.",
+        "type": "high"
+      },
+      {
+        "time": "12:15 AM",
+        "title": "Overnight correction phase",
+        "description": "Multiple small correction boluses overnight gradually coaxed glucose back down into range, reaching normal levels by early morning.",
+        "type": "high"
+      },
+      {
+        "time": "5:30 AM",
+        "title": "Rock-solid morning flatline",
+        "description": "Glucose stayed exceptionally stable in the 90-100 mg/dL range throughout the entire early morning.",
+        "type": "stable"
+      },
+      {
+        "time": "10:41 AM",
+        "title": "Brunch bolus and quick recovery",
+        "description": "Bolusing at 96 mg/dL for 50g of carbs led to a modest peak of 163 mg/dL before bringing you cleanly back down to 91 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on how late meals impact overnight trends\u2014heavier dinners closer to bed seem to take several hours to come back down."
+  },
+  "stats": {
+    "avg": 136,
+    "min": 91,
+    "max": 209,
+    "pct_in_range": 82,
+    "pct_low": 0,
+    "pct_high": 18,
+    "current": 91
+  }
+}
