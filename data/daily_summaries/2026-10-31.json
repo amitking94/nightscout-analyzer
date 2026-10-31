@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-31",
+  "analysis": {
+    "overall": "You spent 87% of the day in range with a strong 136 mg/dL average, anchored by a very smooth morning despite a couple of stubborn meal spikes.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:15 PM",
+        "title": "Lunch spike and quick drop",
+        "description": "Glucose rose to 203 mg/dL after a 50g carb lunch, but the active insulin caught up fast, sending levels down to 76 mg/dL before self-correcting.",
+        "type": "meal"
+      },
+      {
+        "time": "9:07 PM",
+        "title": "Steady dinner",
+        "description": "A 40g carb dinner was bolused cleanly, keeping readings flat in the 80\u2013110 mg/dL target zone for several hours.",
+        "type": "stable"
+      },
+      {
+        "time": "11:15 PM",
+        "title": "Overnight creep",
+        "description": "Levels slowly climbed to 194 mg/dL late at night, taking multiple small corrections before finally coming back down around 4:00 AM.",
+        "type": "high"
+      },
+      {
+        "time": "6:00 AM",
+        "title": "Flat morning baseline",
+        "description": "After the overnight corrections settled, glucose locked into a beautifully steady line around 85\u201390 mg/dL all morning.",
+        "type": "stable"
+      },
+      {
+        "time": "9:48 AM",
+        "title": "Breakfast peak",
+        "description": "A 30g breakfast spiked glucose up to 231 mg/dL, requiring follow-up correction boluses to bring it back down past noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Consider giving breakfast boluses a bit more lead time to help soften the late-morning rise."
+  },
+  "stats": {
+    "avg": 136,
+    "min": 76,
+    "max": 231,
+    "pct_in_range": 87,
+    "pct_low": 0,
+    "pct_high": 13,
+    "current": 147
+  }
+}
