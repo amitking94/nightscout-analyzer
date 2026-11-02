@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-02",
+  "analysis": {
+    "overall": "A stubborn afternoon spike following a quick low made the day feel uneven, but an evening site change restored stability for a smooth dinner and morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "2:37 PM",
+        "title": "Post-meal dip and stubborn spike",
+        "description": "Glucose dropped to a low of 58 mg/dL shortly after bolusing for 50g of carbs, which then turned into a steady rise peaking at 221 mg/dL despite multiple corrections.",
+        "type": "high"
+      },
+      {
+        "time": "6:29 PM",
+        "title": "Site change reset",
+        "description": "Changing your site and insulin helped finally bring that persistent afternoon high back down into range before dinner.",
+        "type": "stable"
+      },
+      {
+        "time": "7:12 PM",
+        "title": "Smooth dinner response",
+        "description": "A 30g carb meal with a 2.1u bolus kept glucose nearly flat, gently leveling off around 130 mg/dL.",
+        "type": "meal"
+      },
+      {
+        "time": "4:30 AM",
+        "title": "Extended overnight low drift",
+        "description": "Glucose hovered in the low 60s for an extended period overnight, keeping temporary high targets active until rising around dawn.",
+        "type": "low"
+      },
+      {
+        "time": "8:25 AM",
+        "title": "Controlled breakfast rise",
+        "description": "Bolusing 4.3u for 40g of carbs kept your morning rise gentle and well within target range.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on timing for larger afternoon meals to prevent initial quick dips that lead to long, late spikes."
+  },
+  "stats": {
+    "avg": 109,
+    "min": 58,
+    "max": 221,
+    "pct_in_range": 80,
+    "pct_low": 12,
+    "pct_high": 8,
+    "current": 153
+  }
+}
