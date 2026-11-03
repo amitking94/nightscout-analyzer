@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-03",
+  "analysis": {
+    "overall": "You spent 90% of your day in range with a flat overnight trend, though stacked correction doses in the early afternoon led to a low and a temporary rebound high.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:20 PM",
+        "title": "Afternoon correction stack",
+        "description": "Taking several small correction doses in quick succession caused glucose to fall continuously over two hours, hitting a low of 56 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "5:35 PM",
+        "title": "Rebound peak after treatment",
+        "description": "Treating the low with carbs alongside additional insulin doses triggered a sharp spike up to 213 mg/dL before settling back down.",
+        "type": "high"
+      },
+      {
+        "time": "8:45 PM",
+        "title": "Dinner rise and return",
+        "description": "A 30g carb meal pushed numbers up to 195 mg/dL, but a series of small corrections helped bring you safely back into target before bed.",
+        "type": "meal"
+      },
+      {
+        "time": "12:00 AM",
+        "title": "Steady overnight baseline",
+        "description": "Your levels remained remarkably stable in the 70\u2013100 mg/dL range through the entire night.",
+        "type": "stable"
+      },
+      {
+        "time": "8:42 AM",
+        "title": "Breakfast bump",
+        "description": "A 40g carb breakfast caused a brief rise to 182 mg/dL, which resolved smoothly back down to ~120 mg/dL within 90 minutes.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Giving correction boluses more time to work before giving follow-up doses can help avoid late-afternoon lows and sudden rebound spikes."
+  },
+  "stats": {
+    "avg": 118,
+    "min": 56,
+    "max": 213,
+    "pct_in_range": 90,
+    "pct_low": 5,
+    "pct_high": 5,
+    "current": 82
+  }
+}
