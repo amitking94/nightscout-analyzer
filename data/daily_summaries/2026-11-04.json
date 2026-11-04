@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-04",
+  "analysis": {
+    "overall": "You had a strong day overall with 92% time in range, marked by smooth recoveries from a couple of mild lows and a late-morning post-breakfast surge.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "8:45 PM",
+        "title": "Post-dinner drop",
+        "description": "Glucose drifted down to 66 mg/dL about an hour after your evening meal dose. Activating a temporary target gave your body time to level out without over-treating.",
+        "type": "low"
+      },
+      {
+        "time": "11:30 PM",
+        "title": "Late evening rise",
+        "description": "As dinner finish digesting and basal rates adjusted, glucose drifted up to 163 mg/dL. A series of small correction doses guided you gently back down around midnight.",
+        "type": "high"
+      },
+      {
+        "time": "5:15 AM",
+        "title": "Early morning dip",
+        "description": "You slowly drifted down to 61 mg/dL while sleeping. Reduced basal delivery helped you gently bounce back into the 80s by morning without needing active carbs.",
+        "type": "low"
+      },
+      {
+        "time": "11:25 AM",
+        "title": "Late morning rise",
+        "description": "Breakfast combined with later snack carbs pushed glucose up to 194 mg/dL. It took a few micro-corrections over two hours to turn the trend around and bring you back to target.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how breakfast carbs kicked in slower and drifted higher late morning\u2014a slightly longer pre-bolus time might help blunt that rise."
+  },
+  "stats": {
+    "avg": 110,
+    "min": 61,
+    "max": 194,
+    "pct_in_range": 92,
+    "pct_low": 6,
+    "pct_high": 3,
+    "current": 115
+  }
+}
