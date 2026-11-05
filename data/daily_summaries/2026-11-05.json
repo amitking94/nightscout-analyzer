@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-05",
+  "analysis": {
+    "overall": "A calm afternoon gave way to a tricky night after a pump battery issue caused glucose to peak near 300 mg/dL, though you managed to bring it back down nicely by morning.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "11:00 PM",
+        "title": "Overnight spike & pump disconnect",
+        "description": "Glucose steadily climbed to a peak of 297 mg/dL while the pump was unreachable. Trends reversed quickly once the battery was replaced at 2:12 AM.",
+        "type": "high"
+      },
+      {
+        "time": "7:10 AM",
+        "title": "Early morning low",
+        "description": "Glucose drifted down to 60 mg/dL before breakfast, prompting a temporary higher target to help stabilize.",
+        "type": "low"
+      },
+      {
+        "time": "8:40 AM",
+        "title": "Post-breakfast dip",
+        "description": "The 5.3u bolus for 60g of carbs outpaced the food, pulling glucose back down to 60 mg/dL by 10:17 AM.",
+        "type": "low"
+      },
+      {
+        "time": "11:30 AM",
+        "title": "Midday stabilization",
+        "description": "Glucose gradually recovered from the morning low and held comfortably steady in the 90\u2013120 mg/dL range.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Check pump battery level and connection status before bed to prevent overnight delivery disruptions."
+  },
+  "stats": {
+    "avg": 143,
+    "min": 60,
+    "max": 297,
+    "pct_in_range": 72,
+    "pct_low": 5,
+    "pct_high": 23,
+    "current": 85
+  }
+}
