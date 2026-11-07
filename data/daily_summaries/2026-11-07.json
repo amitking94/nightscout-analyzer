@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-07",
+  "analysis": {
+    "overall": "While you spent 72% of the day in target range, it was a bit of a roller coaster with big post-meal spikes followed by sharp drops into low territory.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "1:30 PM",
+        "title": "Early afternoon low",
+        "description": "Glucose drifted down to a low of 53 mg/dL before temporary target adjustments and carbs brought levels back into range by 2:00 PM.",
+        "type": "low"
+      },
+      {
+        "time": "10:30 PM",
+        "title": "Late dinner surge and overnight plunge",
+        "description": "A late 25g meal sent glucose peaking up to 225 mg/dL. Several close correction boluses pulled levels down hard, resulting in a drop to 68 mg/dL around 1:30 AM.",
+        "type": "high"
+      },
+      {
+        "time": "5:00 AM",
+        "title": "Smooth morning baseline",
+        "description": "Your blood sugar settled nicely overnight, holding steady in the optimal 70\u201390 mg/dL range throughout the early morning.",
+        "type": "stable"
+      },
+      {
+        "time": "9:24 AM",
+        "title": "Breakfast peak followed by steep drop",
+        "description": "A 60g carb breakfast caused a climb to 234 mg/dL. Multiple follow-up doses corrected the peak but eventually triggered a rapid plunge down to 66 mg/dL by early afternoon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Be mindful of stacking multiple correction boluses during a post-meal peak, as the combined insulin tends to cause sharp drops a couple of hours later."
+  },
+  "stats": {
+    "avg": 128,
+    "min": 53,
+    "max": 234,
+    "pct_in_range": 72,
+    "pct_low": 13,
+    "pct_high": 15,
+    "current": 72
+  }
+}
