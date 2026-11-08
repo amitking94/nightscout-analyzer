@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-08",
+  "analysis": {
+    "overall": "You spent 82% of your day in range despite a stubborn low yesterday afternoon and a morning drift above 200 mg/dL. Small automated corrections kept your overnight steady and helped bring highs down fairly quickly.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:45 PM",
+        "title": "Afternoon low & rebound",
+        "description": "Glucose hovered below target for over an hour, hitting 57 mg/dL before a 30g carb treatment sent levels up to 193 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "8:56 PM",
+        "title": "Evening smooth landing",
+        "description": "After an early evening rise to 187 mg/dL, minor corrections helped bring glucose down gently to a stable 94 mg/dL.",
+        "type": "stable"
+      },
+      {
+        "time": "9:19 AM",
+        "title": "Morning climb to 213 mg/dL",
+        "description": "Glucose drifted up steadily after 7:30 AM to the peak of the day before a correction bolus turned the trend back downward.",
+        "type": "high"
+      },
+      {
+        "time": "11:17 AM",
+        "title": "Lunch meal bolus",
+        "description": "Dosing for a 40g lunch as glucose dropped to 80 mg/dL stopped the fall and started a steady climb back into range.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on the morning drift after 7:30 AM \u2014 stepping in earlier might prevent crossing over 200 mg/dL."
+  },
+  "stats": {
+    "avg": 142,
+    "min": 57,
+    "max": 213,
+    "pct_in_range": 82,
+    "pct_low": 8,
+    "pct_high": 10,
+    "current": 198
+  }
+}
