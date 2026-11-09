@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-09",
+  "analysis": {
+    "overall": "You spent 82% of your day in range with a very stable morning, though late-night digestion and a delayed surge after breakfast drove a couple of stubborn highs.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "5:16 PM",
+        "title": "Evening snack bump",
+        "description": "A 10g snack caused a brief rise up to 183 mg/dL, but a quick correction brought you smoothly back into range within two hours.",
+        "type": "high"
+      },
+      {
+        "time": "10:30 PM",
+        "title": "Late-night stubborn high",
+        "description": "Carbs from your late meal kicked in overnight, sending glucose to a peak of 223 mg/dL around 2:00 AM despite several small correction boluses.",
+        "type": "high"
+      },
+      {
+        "time": "8:15 AM",
+        "title": "Smooth morning low-tide",
+        "description": "Fasting glucose gently coasted down to a low of 79 mg/dL without triggering a sharp crash.",
+        "type": "stable"
+      },
+      {
+        "time": "10:36 AM",
+        "title": "Breakfast pre-bolus success",
+        "description": "Your 3.8u dose for 50g of carbs initially kept your readings flat between 90 and 124 mg/dL through the morning.",
+        "type": "meal"
+      },
+      {
+        "time": "1:40 PM",
+        "title": "Delayed afternoon spike",
+        "description": "Delayed digestion from breakfast caused a sudden rise up to 255 mg/dL, though stacked corrections started pulling it back down quickly.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on larger morning meals\u2014even if glucose stays flat for the first two hours, delayed digestion can cause a rise early in the afternoon."
+  },
+  "stats": {
+    "avg": 140,
+    "min": 79,
+    "max": 255,
+    "pct_in_range": 82,
+    "pct_low": 0,
+    "pct_high": 18,
+    "current": 207
+  }
+}
