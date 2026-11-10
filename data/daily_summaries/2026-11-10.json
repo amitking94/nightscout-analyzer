@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-10",
+  "analysis": {
+    "overall": "A manageable afternoon and steady evening turned into a challenging morning, dominated by a prolonged, stubborn low following an early site change.",
+    "mood": "rough",
+    "events": [
+      {
+        "time": "4:55 PM",
+        "title": "Late afternoon spike",
+        "description": "Glucose crested at 221 mg/dL following back-to-back meal boluses and stacked corrections before heading back down.",
+        "type": "high"
+      },
+      {
+        "time": "8:30 PM",
+        "title": "Smooth evening coast",
+        "description": "Insulin delivered around dinner smoothly brought readings back down into a steady target range around 85\u201395 mg/dL.",
+        "type": "stable"
+      },
+      {
+        "time": "12:05 AM",
+        "title": "Midnight rise",
+        "description": "Glucose drifted up to 172 mg/dL around midnight, taking several small correction doses over two hours to settle.",
+        "type": "high"
+      },
+      {
+        "time": "6:00 AM",
+        "title": "Post-site change drop",
+        "description": "Shortly after a 5:38 AM site change and multiple small corrections, glucose turned sharply downward into low territory.",
+        "type": "low"
+      },
+      {
+        "time": "10:30 AM",
+        "title": "Stubborn morning low",
+        "description": "Glucose lingered between 54\u201365 mg/dL for hours amidst intermittent pump connection loss before finally recovering after 1:00 PM.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Be mindful of stacking micro-corrections immediately following a new site change, as increased absorption can trigger extended lows."
+  },
+  "stats": {
+    "avg": 121,
+    "min": 54,
+    "max": 221,
+    "pct_in_range": 71,
+    "pct_low": 17,
+    "pct_high": 12,
+    "current": 99
+  }
+}
