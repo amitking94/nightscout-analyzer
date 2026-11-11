@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-11",
+  "analysis": {
+    "overall": "You maintained great overall time in range today at 91%, navigating a quick evening dip and a sharp morning breakfast spike smoothly.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "7:52 PM",
+        "title": "Evening low dip",
+        "description": "Glucose drifted down to 65 mg/dL following a late afternoon meal bolus, but temporary basal adjustments helped bring it back up smoothly within an hour.",
+        "type": "low"
+      },
+      {
+        "time": "9:15 AM",
+        "title": "Morning breakfast spike",
+        "description": "After a 40g carb breakfast, glucose peaked quickly at 213 mg/dL before aggressive correction boluses and automated basal adjustments brought it back down to range.",
+        "type": "high"
+      },
+      {
+        "time": "12:37 PM",
+        "title": "Lunch containment",
+        "description": "A 40g carb lunch was bolused well, keeping blood sugars stable and completely flat in the low 130s over the following hour.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for rapid morning rises after breakfast; consider reviewing pre-bolus timing if spikes persist."
+  },
+  "stats": {
+    "avg": 120,
+    "min": 65,
+    "max": 213,
+    "pct_in_range": 91,
+    "pct_low": 2,
+    "pct_high": 7,
+    "current": 134
+  }
+}
