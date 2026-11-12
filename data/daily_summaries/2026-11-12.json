@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-12",
+  "analysis": {
+    "overall": "You spent 87% of the day in range, but aggressive correction boluses following meal- and low-treatment carbs created a sharp late-morning roller coaster.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "3:50 PM",
+        "title": "Afternoon spike",
+        "description": "Glucose drifted up to a peak of 204 mg/dL. Micro-corrections gradually pulled it back into target range over the next hour.",
+        "type": "high"
+      },
+      {
+        "time": "1:45 AM",
+        "title": "Overnight correction drop",
+        "description": "A late-night rise to 169 mg/dL prompted several small corrections, dropping you down to 80 mg/dL by 3:20 AM where you stayed steady through the night.",
+        "type": "high"
+      },
+      {
+        "time": "9:45 AM",
+        "title": "Extended morning low",
+        "description": "Glucose drifted down into the mid-60s during the morning, staying low for nearly an hour before breakfast.",
+        "type": "low"
+      },
+      {
+        "time": "11:00 AM",
+        "title": "Post-breakfast spike",
+        "description": "After eating 30g of carbs to recover from the low, glucose shot up quickly to peak at 215 mg/dL.",
+        "type": "high"
+      },
+      {
+        "time": "1:15 PM",
+        "title": "Early afternoon low",
+        "description": "Multiple correction boluses on top of your meal insulin drove a sharp drop down to 59 mg/dL, requiring 36g of carbs to treat.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking correction boluses shortly after treating a low, as the combined insulin can cause a rapid downward crash."
+  },
+  "stats": {
+    "avg": 118,
+    "min": 59,
+    "max": 215,
+    "pct_in_range": 87,
+    "pct_low": 6,
+    "pct_high": 7,
+    "current": 148
+  }
+}
