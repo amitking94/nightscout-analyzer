@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-13",
+  "analysis": {
+    "overall": "You spent a solid 83% of your day in range, though it came with a couple of sharp swings\u2014particularly a high morning peak that turned into a rapid drop after stacked corrections.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "4:16 PM",
+        "title": "Afternoon meal bump & quick correction",
+        "description": "Your 45g meal pushed readings up to a peak of 210 mg/dL, but a few micro-corrections brought you smoothly back into range within an hour.",
+        "type": "high"
+      },
+      {
+        "time": "8:53 PM",
+        "title": "Gentle evening dip",
+        "description": "Glucose drifted down to 65 mg/dL, but using a temporary target helped you recover back to safe levels without overshooting.",
+        "type": "low"
+      },
+      {
+        "time": "10:00 PM",
+        "title": "Bedtime elevation",
+        "description": "A late meal bolus was followed by a rise to 195 mg/dL, requiring several small correction doses over two hours before leveling off.",
+        "type": "high"
+      },
+      {
+        "time": "8:43 AM",
+        "title": "Morning spike and rapid drop",
+        "description": "Glucose climbed to 221 mg/dL around breakfast, but stacking multiple correction boluses alongside your meal dose caused a quick drop down to 61 mg/dL two hours later.",
+        "type": "high"
+      },
+      {
+        "time": "11:30 AM",
+        "title": "Steady midday baseline",
+        "description": "After recovering from the morning low, your glucose coasted in a beautifully flat line around 90-100 mg/dL for the rest of the afternoon.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Be mindful when giving multiple small correction boluses close together during high spikes, as the combined insulin tail can trigger a sharp drop once it kicks in."
+  },
+  "stats": {
+    "avg": 129,
+    "min": 60,
+    "max": 221,
+    "pct_in_range": 83,
+    "pct_low": 6,
+    "pct_high": 12,
+    "current": 101
+  }
+}
