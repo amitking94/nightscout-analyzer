@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-14",
+  "analysis": {
+    "overall": "You had a strong day overall with 91% time in range and a super smooth night, though a late-morning meal right after a site change caused a sharp spike and fast drop.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "3:57 PM",
+        "title": "Afternoon meal rise",
+        "description": "A 30g carb snack bumped glucose up to 180 mg/dL, but insulin handled it well and brought you back under 120 mg/dL within two hours.",
+        "type": "meal"
+      },
+      {
+        "time": "8:09 PM",
+        "title": "Evening dip and rebound",
+        "description": "A brief low of 68 mg/dL led to a rebound spike up to 199 mg/dL, requiring several small correction doses over the next hour to level off.",
+        "type": "low"
+      },
+      {
+        "time": "12:00 AM",
+        "title": "Smooth overnight cruise",
+        "description": "Your levels stayed remarkably steady between 75 and 110 mg/dL all night, giving you a completely peaceful sleep window.",
+        "type": "stable"
+      },
+      {
+        "time": "10:45 AM",
+        "title": "Post-site change meal spike",
+        "description": "Eating 50g of carbs shortly after a site change triggered a rapid climb up to a peak of 259 mg/dL.",
+        "type": "high"
+      },
+      {
+        "time": "12:00 PM",
+        "title": "Rapid drop back to range",
+        "description": "Multiple correction boluses kicked in together, plunging glucose from 259 mg/dL straight back down to a steady 97 mg/dL.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for rapid drops when correcting meal spikes right after a site change, as insulin absorption can sometimes catch up all at once."
+  },
+  "stats": {
+    "avg": 119,
+    "min": 68,
+    "max": 259,
+    "pct_in_range": 91,
+    "pct_low": 2,
+    "pct_high": 7,
+    "current": 97
+  }
+}
