@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "analysis": {
+    "overall": "A mixed day with 73% time in range, characterized by good stability around dinner offset by a stubborn late-night high and a lingering early morning low.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "6:03 PM",
+        "title": "Early evening low and quick bounce",
+        "description": "Glucose dipped to 66 mg/dL before rebounding quickly up to 159 mg/dL over the following half hour.",
+        "type": "low"
+      },
+      {
+        "time": "12:30 AM",
+        "title": "Late-night spike",
+        "description": "Starting around 11:00 PM, glucose steadily rose and peaked at 249 mg/dL despite multiple small correction boluses.",
+        "type": "high"
+      },
+      {
+        "time": "6:30 AM",
+        "title": "Extended early morning low",
+        "description": "The cumulative effect of late-night correction insulin kept glucose hovering low between 60\u201367 mg/dL for over an hour.",
+        "type": "low"
+      },
+      {
+        "time": "1:36 PM",
+        "title": "Afternoon surge after lunch",
+        "description": "Starting from an elevated pre-meal reading, levels continued to climb post-lunch, topping out at 254 mg/dL.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking multiple small corrections during late-night highs, as the delayed peak can drive extended lows around sunrise."
+  },
+  "stats": {
+    "avg": 140,
+    "min": 60,
+    "max": 254,
+    "pct_in_range": 73,
+    "pct_low": 8,
+    "pct_high": 19,
+    "current": 254
+  }
+}
