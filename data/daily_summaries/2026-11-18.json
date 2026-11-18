@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-18",
+  "analysis": {
+    "overall": "A strong day with 90% time in range and a low average of 124 mg/dL, though a late-night spike required aggressive corrections that caused a rapid overnight fall.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "4:39 PM",
+        "title": "Late afternoon return to range",
+        "description": "After hovering around 198 mg/dL, meal insulin and small corrections brought glucose down smoothly into the 110s by 5:30 PM.",
+        "type": "high"
+      },
+      {
+        "time": "12:38 AM",
+        "title": "Late-night spike",
+        "description": "Glucose climbed steadily up to 239 mg/dL, prompting multiple close correction doses over an hour.",
+        "type": "high"
+      },
+      {
+        "time": "1:30 AM",
+        "title": "Steep overnight drop",
+        "description": "The accumulated correction insulin took effect quickly, driving glucose down from 239 mg/dL to 81 mg/dL where it safely flattened out.",
+        "type": "low"
+      },
+      {
+        "time": "7:10 AM",
+        "title": "Waking up near low boundary",
+        "description": "Glucose drifted down to 71 mg/dL in the early morning before minor corrections lifted it safely back around 100 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "8:53 AM",
+        "title": "Breakfast peak and recovery",
+        "description": "A 50g carb meal created a controlled rise up to 161 mg/dL around 11:30 AM, returning smoothly to 105 mg/dL by early afternoon.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Be cautious when giving multiple small correction boluses close together late at night, as they can combine into a very steep drop during sleep."
+  },
+  "stats": {
+    "avg": 124,
+    "min": 71,
+    "max": 239,
+    "pct_in_range": 90,
+    "pct_low": 0,
+    "pct_high": 10,
+    "current": 110
+  }
+}
