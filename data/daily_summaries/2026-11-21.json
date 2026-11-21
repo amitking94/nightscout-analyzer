@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-21",
+  "analysis": {
+    "overall": "You spent a good portion of the day in a solid target range, though you dealt with a late-night climb and an early morning drift downward.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "7:50 PM",
+        "title": "Evening Meal",
+        "description": "A 20g carb bolus handled smoothly for a while, though it required a few minor corrections later in the evening as numbers crept up.",
+        "type": "meal"
+      },
+      {
+        "time": "10:24 PM",
+        "title": "Late Night Climb",
+        "description": "Glucose drifted up toward 190 mg/dL, requiring a sequence of small correction boluses and automated adjustments to bring it back down.",
+        "type": "high"
+      },
+      {
+        "time": "4:48 AM",
+        "title": "Early Morning Low",
+        "description": "After the overnight corrections wore off, glucose drifted down to a minimum of 58 mg/dL before recovering nicely.",
+        "type": "low"
+      },
+      {
+        "time": "8:20 AM",
+        "title": "Breakfast and Spike",
+        "description": "A 50g carb breakfast led to a sharp upward trend, peaking around 208 mg/dL before insulin brought things back down toward noon.",
+        "type": "high"
+      }
+    ],
+    "watch_for_tomorrow": "Keep an eye on the post-breakfast rise; pre-bolusing slightly earlier might help blunt that morning spike."
+  },
+  "stats": {
+    "avg": 121,
+    "min": 58,
+    "max": 208,
+    "pct_in_range": 79,
+    "pct_low": 8,
+    "pct_high": 13,
+    "current": 69
+  }
+}
