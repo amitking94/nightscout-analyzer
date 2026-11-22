@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-22",
+  "analysis": {
+    "overall": "You had a strong day with 96% time in range, keeping glucose steady for most of the day despite a late-night spike and a brief early morning low.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "2:14 PM",
+        "title": "Afternoon meal bump",
+        "description": "Dosing 3.4u for 40g of carbs caused a temporary rise to 177 mg/dL, but glucose settled back into target within an hour.",
+        "type": "meal"
+      },
+      {
+        "time": "9:23 PM",
+        "title": "Late evening spike",
+        "description": "A late snack pushed glucose up to the daily high of 209 mg/dL, though small correction boluses brought it back under control before midnight.",
+        "type": "high"
+      },
+      {
+        "time": "6:28 AM",
+        "title": "Brief morning dip",
+        "description": "Glucose touched a low of 66 mg/dL around wake-up time before quickly rebounding back into range.",
+        "type": "low"
+      },
+      {
+        "time": "12:16 PM",
+        "title": "Smooth lunch coverage",
+        "description": "A 4.3u bolus for 50g of carbs completely prevented a post-meal spike, keeping your levels steady near 75\u201380 mg/dL.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Late evening carbs hit much harder than daytime meals, so extra pre-bolus time at night might help prevent late spikes."
+  },
+  "stats": {
+    "avg": 114,
+    "min": 66,
+    "max": 209,
+    "pct_in_range": 96,
+    "pct_low": 1,
+    "pct_high": 3,
+    "current": 75
+  }
+}
