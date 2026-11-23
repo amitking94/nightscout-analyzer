@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-23",
+  "analysis": {
+    "overall": "You had a solid 77% time in range and a remarkably stable night, but insulin stacking during a late-morning high led to a sharp afternoon low.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "9:09 PM",
+        "title": "Evening site change",
+        "description": "After addressing an early evening rise with a couple of boluses, you completed a site change while glucose levels settled nicely into the 120-130 mg/dL range.",
+        "type": "stable"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Smooth overnight stability",
+        "description": "Your numbers stayed exceptionally steady between 80 and 105 mg/dL throughout the entire night, giving your body a long rest period in target range.",
+        "type": "stable"
+      },
+      {
+        "time": "8:34 AM",
+        "title": "Breakfast spike",
+        "description": "Dosing 3.1u for 40g of carbs led to a gradual climb that accelerated after 9:30 AM, reaching a peak of 241 mg/dL despite multiple small correction boluses.",
+        "type": "high"
+      },
+      {
+        "time": "2:04 PM",
+        "title": "Post-correction low",
+        "description": "The accumulated correction insulin from late morning eventually hit all at once, pulling your glucose down to a low of 53 mg/dL before recovering with carbs.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Be mindful of stacking multiple small correction boluses close together when managing post-breakfast highs, as the full effect can lag and cause a drop hours later."
+  },
+  "stats": {
+    "avg": 139,
+    "min": 53,
+    "max": 241,
+    "pct_in_range": 77,
+    "pct_low": 2,
+    "pct_high": 20,
+    "current": 153
+  }
+}
