@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-24",
+  "analysis": {
+    "overall": "You spent 90% of the day in range with a solid average of 118 mg/dL, though a couple of stacked correction doses caused sharp dips late last night and overnight.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "8:57 PM",
+        "title": "Post-dinner low",
+        "description": "Adding a small correction bolus shortly after dinner combined with active insulin, dropping you down to 53 mg/dL before a 23g carb treatment brought you back up.",
+        "type": "low"
+      },
+      {
+        "time": "3:15 AM",
+        "title": "Overnight correction drop",
+        "description": "Multiple small micro-corrections given between midnight and 2:50 AM accumulated and triggered a fast drop down to 69 mg/dL.",
+        "type": "low"
+      },
+      {
+        "time": "10:19 AM",
+        "title": "Breakfast rollercoaster",
+        "description": "Insulin hit faster than your 60g breakfast carbs, causing a temporary dip to 77 mg/dL followed by a quick bounce up to 152 mg/dL.",
+        "type": "high"
+      },
+      {
+        "time": "12:08 PM",
+        "title": "Smooth lunch handling",
+        "description": "A 4.8u dose for 70g of carbs kept your glucose steady, peaking gently at 161 mg/dL before settling into range.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking small correction boluses when sitting between 140\u2013160 mg/dL, as the overlapping insulin tends to cause sudden drops 2\u20133 hours later."
+  },
+  "stats": {
+    "avg": 118,
+    "min": 53,
+    "max": 220,
+    "pct_in_range": 90,
+    "pct_low": 8,
+    "pct_high": 2,
+    "current": 100
+  }
+}
