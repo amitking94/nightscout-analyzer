@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-25",
+  "analysis": {
+    "overall": "You spent 78% of the day in range with a beautifully flat overnight line, though stacked corrections around lunchtime brought on a sharp low and a high rebound spike.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "9:45 PM",
+        "title": "Late-evening spike",
+        "description": "Glucose climbed to a peak of 243 mg/dL following evening carbs, taking several small correction doses a few hours to pull back into range.",
+        "type": "high"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Steady overnight baseline",
+        "description": "Levels remained flat and stable between 110\u2013140 mg/dL all through the night with automated basal adjustments doing their job.",
+        "type": "stable"
+      },
+      {
+        "time": "8:54 AM",
+        "title": "Breakfast pre-bolus success",
+        "description": "Dosing 5.6u for 70g of carbs worked great, holding your glucose remarkably steady around 150\u2013160 mg/dL for over two hours.",
+        "type": "meal"
+      },
+      {
+        "time": "1:58 PM",
+        "title": "Midday low & fast rebound",
+        "description": "Multiple small correction doses in the late morning combined to push your glucose down to 66 mg/dL, followed by a sharp rebound rise up to 238 mg/dL.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Watch out for stacking multiple correction doses closely together late in the morning, as the delayed insulin overlap caused a sharp drop into a low."
+  },
+  "stats": {
+    "avg": 150,
+    "min": 66,
+    "max": 243,
+    "pct_in_range": 78,
+    "pct_low": 0,
+    "pct_high": 21,
+    "current": 238
+  }
+}
