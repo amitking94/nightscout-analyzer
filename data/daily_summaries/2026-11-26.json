@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-26",
+  "analysis": {
+    "overall": "The day featured a major morning spike reaching over 300 mg/dL following pump connectivity issues, which required aggressive stacking of corrections before stabilizing by midday.",
+    "mood": "rough",
+    "events": [
+      {
+        "time": "Nov 26, 8:02 AM",
+        "title": "Pump Connectivity Issues",
+        "description": "Repeated 'pump unreachable' notifications interrupted automated delivery, allowing glucose to climb out of range.",
+        "type": "high"
+      },
+      {
+        "time": "Nov 26, 10:54 AM",
+        "title": "Significant Morning Spike",
+        "description": "Glucose peaked at 306 mg/dL due to missed delivery, leading to a long chain of micro-corrections over several hours.",
+        "type": "high"
+      },
+      {
+        "time": "Nov 26, 1:25 PM",
+        "title": "Lunch Carb Intake",
+        "description": "A 50g meal bolus was administered as glucose recovered, triggering a moderate secondary rise that was successfully reined in.",
+        "type": "meal"
+      },
+      {
+        "time": "Nov 26, 2:56 PM",
+        "title": "Rapid Descent",
+        "description": "Aggressive correction stacking caught up, causing a steep drop of over 20 mg/dL every 5 minutes before leveling out near 130 mg/dL.",
+        "type": "stable"
+      }
+    ],
+    "watch_for_tomorrow": "Keep a close eye on pump connectivity and site performance to prevent unexpected delivery gaps from triggering another major climb."
+  },
+  "stats": {
+    "avg": 155,
+    "min": 77,
+    "max": 306,
+    "pct_in_range": 73,
+    "pct_low": 0,
+    "pct_high": 27,
+    "current": 130
+  }
+}
