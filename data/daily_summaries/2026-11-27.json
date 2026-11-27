@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-27",
+  "analysis": {
+    "overall": "You had a solid day with 88% time in range, enjoying a flat overnight baseline despite a couple of temporary rises over 200 mg/dL in the evening and around midday.",
+    "mood": "good",
+    "events": [
+      {
+        "time": "9:40 PM",
+        "title": "Evening bump around site change",
+        "description": "Glucose crested at 212 mg/dL right after an evening site change, but stacked corrections brought you back into target before midnight.",
+        "type": "high"
+      },
+      {
+        "time": "3:00 AM",
+        "title": "Steady overnight baseline",
+        "description": "Your readings settled smoothly between 73\u201385 mg/dL for most of the night without dipping into low territory.",
+        "type": "stable"
+      },
+      {
+        "time": "6:30 AM",
+        "title": "Early morning spike",
+        "description": "A brief morning rise pushed readings to 167 mg/dL, which came down quickly back to target following prompt corrections.",
+        "type": "high"
+      },
+      {
+        "time": "12:50 PM",
+        "title": "Delayed breakfast rise",
+        "description": "Despite bolusing 5.2u for 60g carbs at 9:00 AM, glucose stayed flat early on before slowly climbing to 213 mg/dL several hours later.",
+        "type": "high"
+      },
+      {
+        "time": "1:10 PM",
+        "title": "Lunch bolus brings down high",
+        "description": "A 4u bolus at 1:09 PM effectively turned around the high, bringing readings down from 204 mg/dL to 97 mg/dL by mid-afternoon.",
+        "type": "meal"
+      }
+    ],
+    "watch_for_tomorrow": "Notice how breakfast carbs took nearly an hour to start rising, which led to a delayed peak around lunchtime."
+  },
+  "stats": {
+    "avg": 132,
+    "min": 73,
+    "max": 213,
+    "pct_in_range": 88,
+    "pct_low": 0,
+    "pct_high": 12,
+    "current": 111
+  }
+}
