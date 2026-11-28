@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-28",
+  "analysis": {
+    "overall": "You had a strong 89% time in range and a remarkably stable night, but a late-morning spike followed by heavy correction boluses led to a steep afternoon low.",
+    "mood": "mixed",
+    "events": [
+      {
+        "time": "8:41 PM",
+        "title": "Dinner rise & pump battery swap",
+        "description": "Glucose bumped up to 174 mg/dL around dinner and a pump battery change, but gentle corrections brought you right back to target by late evening.",
+        "type": "high"
+      },
+      {
+        "time": "2:00 AM",
+        "title": "Steady overnight baseline",
+        "description": "Your levels stayed exceptionally smooth between 70 and 110 mg/dL all night, giving you a safe and rested start to the morning.",
+        "type": "stable"
+      },
+      {
+        "time": "11:06 AM",
+        "title": "Late morning spike",
+        "description": "Glucose shot up quickly to 307 mg/dL, prompting multiple close-together correction boluses to bring it back down.",
+        "type": "high"
+      },
+      {
+        "time": "2:15 PM",
+        "title": "Post-correction drop to 54 mg/dL",
+        "description": "The accumulated insulin from earlier corrections combined with your lunch bolus pulled levels down rapidly into a low.",
+        "type": "low"
+      }
+    ],
+    "watch_for_tomorrow": "Be mindful of stacking multiple correction boluses during high spikes to avoid a steep drop once all the insulin peaks together."
+  },
+  "stats": {
+    "avg": 124,
+    "min": 54,
+    "max": 307,
+    "pct_in_range": 89,
+    "pct_low": 3,
+    "pct_high": 8,
+    "current": 61
+  }
+}
